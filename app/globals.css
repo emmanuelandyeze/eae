@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f7f3;        /* Warm paper off-white */
+  --foreground: #171716;        /* Deep charcoal */
+  --text-muted: #6e6e68;
+  --border-color: #dedede;
+  --border-muted: #e7e7e2;
+  --accent-color: #0d5c3a;      /* Deep forest green */
+  --pill-bg: #ecece6;
+  --pill-hover: #e2e2da;
+  --card-hover-bg: #fdfdfc;
+}
+
+/* Class-based theme toggling matching html.dark */
+html.dark {
+  --background: #121211;        /* Deep ink black */
+  --foreground: #f4f4f0;        /* Warm off-white */
+  --text-muted: #8c8c83;
+  --border-color: #2c2c29;
+  --border-muted: #20201e;
+  --accent-color: #4da677;      /* Bright sage green */
+  --pill-bg: #1c1c1a;
+  --pill-hover: #262624;
+  --card-hover-bg: #181817;
+}
+
+@theme {
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+  
+  --color-bg-paper: var(--background);
+  --color-text-primary: var(--foreground);
+  --color-text-muted: var(--text-muted);
+  --color-border-main: var(--border-color);
+  --color-border-sub: var(--border-muted);
+  --color-accent: var(--accent-color);
+  --color-pill-bg: var(--pill-bg);
+  --color-pill-hover: var(--pill-hover);
+  --color-card-hover: var(--card-hover-bg);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
+/* -------------------------------------------------------------
+ * Custom Marquee Animation
+ * ------------------------------------------------------------- */
+@keyframes marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 35s linear infinite;
+}
+
+/* -------------------------------------------------------------
+ * Scroll Reveal Animation Classes
+ * ------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
