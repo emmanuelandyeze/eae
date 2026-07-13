@@ -7,6 +7,10 @@ import { cookies } from 'next/headers';
 
 const thoughtsDir = path.join(process.cwd(), 'content/thoughts');
 
+function isReadOnlyEnv(): boolean {
+  return !!process.env.VERCEL || process.env.VERCEL_ENV !== undefined;
+}
+
 export interface AuthResult {
   success: boolean;
   message: string;
@@ -125,6 +129,13 @@ export async function publishThought(
       return { success: false, message: "Unauthorized. Please log in first." };
     }
 
+    if (isReadOnlyEnv()) {
+      return { 
+        success: false, 
+        message: "This hosted environment is read-only (Serverless hosting). To publish or edit thoughts, run this site locally on localhost, save to disk, and push the committed Markdown files to GitHub to redeploy." 
+      };
+    }
+
     if (!title.trim() || !content.trim()) {
       return { success: false, message: "Title and Content are required." };
     }
@@ -210,6 +221,13 @@ export async function deleteThought(slug: string): Promise<PublishResult> {
     const isAuthenticated = await checkAdminAuth();
     if (!isAuthenticated) {
       return { success: false, message: "Unauthorized. Please log in first." };
+    }
+
+    if (isReadOnlyEnv()) {
+      return { 
+        success: false, 
+        message: "This hosted environment is read-only (Serverless hosting). To delete thoughts, delete the markdown file from your local content/thoughts folder and push the commit to GitHub." 
+      };
     }
 
     const filePath = path.join(thoughtsDir, `${slug}.md`);
