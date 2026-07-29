@@ -17,6 +17,11 @@ export interface Project {
   builtWith: string;
   status: string;
   links: ProjectLink[];
+  /**
+   * Screenshot of the live site, in `public/projects`. Omitted for work with
+   * no public URL to capture — those render a typographic panel instead.
+   */
+  image?: string;
   /** Featured entries get the full-width treatment */
   featured?: boolean;
 }
@@ -36,6 +41,7 @@ export const projects: Project[] = [
       'A simple dashboard showing how the business is doing',
     ],
     builtWith: 'WhatsApp Business, Next.js, Node.js',
+    image: '/projects/tradeet.webp',
     status: 'Live, with paying users',
     links: [
       { label: 'Visit the site', href: 'https://tradeet.ng' },
@@ -58,6 +64,7 @@ export const projects: Project[] = [
       'A private dashboard the team runs on their own',
     ],
     builtWith: 'Next.js, MongoDB, Cloudinary',
+    image: '/projects/yaaas.webp',
     status: 'Live',
     links: [
       { label: 'Visit the site', href: 'https://yaaas.co' },
@@ -77,6 +84,7 @@ export const projects: Project[] = [
       'ID checks before a seller can trade',
     ],
     builtWith: 'Next.js, Flutterwave, MongoDB',
+    image: '/projects/yunimall.webp',
     status: 'Live',
     links: [
       { label: 'Visit the site', href: 'https://app.yuni-mall.com' },
@@ -88,13 +96,14 @@ export const projects: Project[] = [
     name: 'Afrosoundtrack',
     sector: 'Music',
     summary:
-      'Shows musicians exactly where in the world their songs are being played, drawn live on a map. There is a phone app too, so an artist can check how a release is travelling from anywhere.',
+      'A music publishing and licensing platform that helps African artists, songwriters, producers and session musicians earn from their work globally — and shows them on a live map where their songs are actually being played.',
     highlights: [
+      'Earnings from around the world in one place',
       'A live map of where the music is playing',
-      'Plain-English listening reports',
       'A companion app for iPhone and Android',
     ],
     builtWith: 'Next.js, React Native, PostgreSQL',
+    image: '/projects/afrosoundtrack.webp',
     status: 'Live',
     links: [
       { label: 'Visit the site', href: 'https://afrosoundtrack.com' },
@@ -113,6 +122,7 @@ export const projects: Project[] = [
       'Both sides can see exactly where things stand',
     ],
     builtWith: 'Next.js, Node.js, MongoDB',
+    image: '/projects/auditme.webp',
     status: 'Live',
     links: [
       { label: 'Visit the site', href: 'https://auditme.com.ng' },
@@ -124,13 +134,14 @@ export const projects: Project[] = [
     name: 'Diagknos',
     sector: 'Healthcare',
     summary:
-      'Helps a patient find a diagnostic clinic near them, see what it costs and book an appointment in a few taps. Then it texts and emails a reminder, so far fewer people forget to turn up.',
+      'Lets a patient book any of more than a hundred lab tests online and have a certified professional come to their home or office to take the sample — then tracks it, temperature-controlled, all the way to the accredited lab and back as a result. No queues, no lost reports.',
     highlights: [
-      'Finds the closest clinics first',
-      'Booking without a single phone call',
-      'Automatic text and email reminders',
+      'Over 100 tests, booked without a phone call',
+      'Sample collected at your home or office',
+      'Every stage tracked, from booking to result',
     ],
     builtWith: 'Next.js, Google Maps, Twilio',
+    image: '/projects/diagknos.webp',
     status: 'Live',
     links: [
       { label: 'Visit the site', href: 'https://diagknos.com' },
@@ -157,13 +168,14 @@ export const projects: Project[] = [
     name: 'Pepcode',
     sector: 'Retail & payments',
     summary:
-      'Handles the money side of running a shop. It records every sale as it happens, keeps track of what has been bought and sold, and takes card payments right at the counter — so the books are already done at closing time.',
+      'Daily bookkeeping for small businesses that do not have an accountant. It tracks what goes out, keeps count of stock, and turns a sale into a proper invoice — so the books are already done at closing time instead of piling up for month end.',
     highlights: [
-      'Take card payments at the counter',
-      'Sales recorded without anyone writing them down',
-      'A nudge when stock is running low',
+      'Expenses tracked as they happen',
+      'Stock counted without a stocktake',
+      'Invoices generated in seconds',
     ],
     builtWith: 'React, NestJS, MongoDB',
+    image: '/projects/pepcode.webp',
     status: 'Live',
     links: [
       { label: 'Visit the site', href: 'https://pepcodeinc.com/' },
@@ -182,6 +194,7 @@ export const projects: Project[] = [
       'Records a bank will actually accept',
     ],
     builtWith: 'Next.js, Google Sheets, Tailwind',
+    image: '/projects/owa.webp',
     status: 'Live',
     links: [
       { label: 'Visit the site', href: 'https://owabypepcode.com.ng' },
@@ -200,6 +213,7 @@ export const projects: Project[] = [
       'The team publishes their own articles',
     ],
     builtWith: 'Next.js, Sanity, MongoDB',
+    image: '/projects/htlegal.webp',
     status: 'Live',
     links: [
       { label: 'Visit the site', href: 'https://htlegal.com.ng' },
@@ -218,6 +232,7 @@ export const projects: Project[] = [
       'Enquiries go straight to WhatsApp',
     ],
     builtWith: 'Next.js, Tailwind CSS',
+    image: '/projects/arc9.webp',
     status: 'Live',
     links: [
       { label: 'Visit the site', href: 'https://www.arc9consult.com/' },

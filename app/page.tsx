@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import ScrollReveal from '@/components/ScrollReveal';
@@ -155,78 +156,102 @@ export default function Home() {
                 key={project.name}
                 className="group border-t border-border-main py-10 sm:py-14 project-card-reveal"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12">
-                  {/* Name + sector */}
-                  <div className="lg:col-span-4 flex items-start gap-4">
-                    <span className="text-xs font-mono text-text-muted pt-2">
-                      {project.num}
-                    </span>
-                    <div className="flex flex-col gap-2">
-                      <h3
-                        className={`display text-text-primary group-hover:text-accent-ink transition-colors ${
-                          project.featured
-                            ? 'text-4xl sm:text-5xl lg:text-[3.5rem]'
-                            : 'text-3xl sm:text-4xl'
-                        }`}
-                      >
-                        {project.name}
-                      </h3>
-                      <span className="eyebrow">{project.sector}</span>
-                      <span className="inline-flex items-center gap-2 text-xs text-text-muted mt-1">
-                        <span
-                          className={`w-1.5 h-1.5 rounded-full ${
-                            project.status.startsWith('Live')
-                              ? 'bg-accent'
-                              : 'bg-text-muted'
-                          }`}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                  {/* Snapshot of the live site */}
+                  <div className="lg:col-span-5">
+                    <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-border-main bg-surface">
+                      {project.image ? (
+                        <Image
+                          src={project.image}
+                          alt={`The ${project.name} website`}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 45vw"
+                          className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
                         />
-                        {project.status}
-                      </span>
+                      ) : (
+                        // No public URL to capture — a typographic panel instead
+                        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-6">
+                          <span className="display text-3xl sm:text-4xl text-text-muted">
+                            {project.name}
+                          </span>
+                          <span className="eyebrow">Private client build</span>
+                        </div>
+                      )}
                     </div>
                   </div>
 
-                  {/* Summary + what it does */}
-                  <div className="lg:col-span-5 flex flex-col gap-5">
+                  {/* Everything else */}
+                  <div className="lg:col-span-7 flex flex-col gap-6">
+                    <div className="flex items-start gap-4">
+                      <span className="text-xs font-mono text-text-muted pt-2">
+                        {project.num}
+                      </span>
+                      <div className="flex flex-col gap-2">
+                        <h3
+                          className={`display text-text-primary group-hover:text-accent-ink transition-colors ${
+                            project.featured
+                              ? 'text-4xl sm:text-5xl lg:text-[3.5rem]'
+                              : 'text-3xl sm:text-4xl'
+                          }`}
+                        >
+                          {project.name}
+                        </h3>
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                          <span className="eyebrow">{project.sector}</span>
+                          <span className="inline-flex items-center gap-2 text-xs text-text-muted">
+                            <span
+                              className={`w-1.5 h-1.5 rounded-full ${
+                                project.status.startsWith('Live')
+                                  ? 'bg-accent'
+                                  : 'bg-text-muted'
+                              }`}
+                            />
+                            {project.status}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
                     <p className="text-base sm:text-lg text-text-primary leading-relaxed font-light">
                       {project.summary}
                     </p>
-                    <ul className="flex flex-col gap-2">
+
+                    <ul className="grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-2">
                       {project.highlights.map((highlight) => (
                         <li
                           key={highlight}
-                          className="flex items-start gap-3 text-sm text-text-muted"
+                          className="flex items-start gap-2.5 text-sm text-text-muted"
                         >
                           <span className="text-accent-ink pt-0.5 leading-none">/</span>
                           {highlight}
                         </li>
                       ))}
                     </ul>
-                  </div>
 
-                  {/* Built with + links */}
-                  <div className="lg:col-span-3 flex flex-col gap-5">
-                    <div className="flex flex-col gap-2">
-                      <span className="eyebrow">Built with</span>
-                      <span className="text-sm text-text-muted">
-                        {project.builtWith}
-                      </span>
-                    </div>
-                    <div className="flex flex-col gap-2.5 items-start">
-                      {project.links.map((link) => {
-                        const isExternal = link.href.startsWith('http');
-                        return (
-                          <a
-                            key={link.href}
-                            href={link.href}
-                            {...(isExternal
-                              ? { target: '_blank', rel: 'noopener noreferrer' }
-                              : {})}
-                            className="inline-flex items-center gap-1.5 text-sm font-semibold text-text-primary border-b border-border-main hover:text-accent-ink hover:border-accent pb-0.5 transition-colors"
-                          >
-                            {link.label} <ArrowUpRight className="w-3.5 h-3.5" />
-                          </a>
-                        );
-                      })}
+                    <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4 pt-2 border-t border-border-sub">
+                      <div className="flex flex-col gap-1 pt-3">
+                        <span className="eyebrow">Built with</span>
+                        <span className="text-sm text-text-muted">
+                          {project.builtWith}
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap gap-5 pt-3">
+                        {project.links.map((link) => {
+                          const isExternal = link.href.startsWith('http');
+                          return (
+                            <a
+                              key={link.href}
+                              href={link.href}
+                              {...(isExternal
+                                ? { target: '_blank', rel: 'noopener noreferrer' }
+                                : {})}
+                              className="inline-flex items-center gap-1.5 text-sm font-semibold text-text-primary border-b border-border-main hover:text-accent-ink hover:border-accent pb-0.5 transition-colors"
+                            >
+                              {link.label} <ArrowUpRight className="w-3.5 h-3.5" />
+                            </a>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
                 </div>
