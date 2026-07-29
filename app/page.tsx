@@ -18,16 +18,6 @@ const marqueeItems = [
   'Custom software',
 ];
 
-/**
- * The name is set as two justified lines pinned to one width, so both edges
- * align. `w-[6.1em]` is font-size-relative, and sits just wider than the longer
- * line's natural width (5.47em at 300) — enough to space the letters on both
- * lines without either looking stretched.
- */
-const NAME_LINES = [
-  { text: 'Emmanuel', weight: 'font-light' },
-  { text: 'Andy Eze', weight: 'font-semibold' },
-];
 
 /**
  * Cell dividers for the metrics grid: two columns on mobile, four on desktop.
@@ -81,20 +71,11 @@ export default function Home() {
 
             <div className="flex flex-col gap-3 sm:gap-4 min-w-0">
               <h1
-                className="display text-[12.5vw] sm:text-[7.5vw] lg:text-[6.5rem] tracking-normal text-text-primary"
+                className="display text-[11.5vw] sm:text-[4.4vw] md:text-[5vw] lg:text-[4rem] text-text-primary whitespace-normal sm:whitespace-nowrap"
                 aria-label="Emmanuel Andy Eze"
               >
-                {NAME_LINES.map(({ text, weight }) => (
-                  <span
-                    key={text}
-                    aria-hidden="true"
-                    className={`flex justify-between w-[6.1em] ${weight}`}
-                  >
-                    {[...text].map((char, i) => (
-                      <span key={i}>{char === ' ' ? ' ' : char}</span>
-                    ))}
-                  </span>
-                ))}
+                <span className="block sm:inline">Emmanuel </span>
+                <span className="block sm:inline">Andy Eze</span>
               </h1>
               <div className="flex flex-col gap-2">
                 <span className="text-2xl sm:text-3xl lg:text-[2.25rem] font-medium tracking-tight leading-none text-accent-ink">
@@ -230,11 +211,10 @@ export default function Home() {
                       </span>
                       <div className="flex flex-col gap-2">
                         <h3
-                          className={`display text-text-primary group-hover:text-accent-ink transition-colors ${
-                            project.featured
-                              ? 'text-4xl sm:text-5xl lg:text-[3.5rem]'
-                              : 'text-3xl sm:text-4xl'
-                          }`}
+                          className={`display text-text-primary group-hover:text-accent-ink transition-colors ${project.featured
+                            ? 'text-4xl sm:text-5xl lg:text-[3.5rem]'
+                            : 'text-3xl sm:text-4xl'
+                            }`}
                         >
                           {project.name}
                         </h3>
@@ -242,11 +222,10 @@ export default function Home() {
                           <span className="eyebrow">{project.sector}</span>
                           <span className="inline-flex items-center gap-2 text-xs text-text-muted">
                             <span
-                              className={`w-1.5 h-1.5 rounded-full ${
-                                project.status.startsWith('Live')
-                                  ? 'bg-accent'
-                                  : 'bg-text-muted'
-                              }`}
+                              className={`w-1.5 h-1.5 rounded-full ${project.status.startsWith('Live')
+                                ? 'bg-accent'
+                                : 'bg-text-muted'
+                                }`}
                             />
                             {project.status}
                           </span>

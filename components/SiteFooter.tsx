@@ -32,7 +32,7 @@ export default function SiteFooter({ compact = false }: { compact?: boolean }) {
                 Send me an email <ArrowUpRight className="w-4 h-4" />
               </a>
               <a
-                href="https://wa.me/2348141898230"
+                href="https://wa.me/2347034343002"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 border border-border-main text-text-primary px-6 py-3.5 rounded-full text-sm font-semibold hover:border-accent hover:text-accent-ink transition-colors"
