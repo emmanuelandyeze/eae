@@ -12,6 +12,7 @@ import {
   publishThought 
 } from './actions';
 import ThemeToggle from '@/components/ThemeToggle';
+import { AlertTriangle, ArrowLeft, ArrowUpRight, Check, Spinner } from '@/components/Icons';
 
 export default function WriteThought() {
   const router = useRouter();
@@ -36,16 +37,7 @@ export default function WriteThought() {
 
   // 1. Initial Authentication Check and URL Edit Param Check
   useEffect(() => {
-    // Run theme check immediately on mount to load dark/light mode
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
-    if (shouldBeDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-
+    // Theme is applied before paint by the blocking script in the root layout.
     const init = async () => {
       // Check if logged in
       const auth = await checkAdminAuth();
@@ -83,7 +75,7 @@ export default function WriteThought() {
           const parsed = await marked.parse(content);
           setPreview(parsed);
         } catch (e) {
-          setPreview("<p class='text-accent'>Error rendering preview...</p>");
+          setPreview("<p class='text-accent-ink'>Error rendering preview...</p>");
         }
       } else {
         setPreview("<p class='text-text-muted italic'>Type markdown in the editor to see a preview here...</p>");
@@ -186,10 +178,10 @@ export default function WriteThought() {
         </div>
         <div className="max-w-[400px] w-full border border-border-main rounded-xl p-8 bg-bg-paper flex flex-col gap-6 shadow-sm">
           <div className="flex flex-col gap-1 items-center text-center">
-            <span className="text-[9px] font-bold tracking-widest text-accent uppercase bg-pill-bg px-2 py-0.5 rounded-full">
+            <span className="text-[9px] font-bold tracking-widest text-accent-ink uppercase bg-surface px-2 py-0.5 rounded-full">
               Local Admin Gateway
             </span>
-            <h1 className="font-serif text-2xl font-bold tracking-tight text-text-primary mt-2">
+            <h1 className="text-2xl font-bold tracking-tight text-text-primary mt-2">
               Enter Admin Passcode
             </h1>
             <p className="text-xs text-text-muted">
@@ -198,8 +190,9 @@ export default function WriteThought() {
           </div>
 
           {loginError && (
-            <div className="bg-red-500/10 border border-red-500 rounded-lg p-3 text-xs text-red-500 font-mono text-center">
-              ⚠ {loginError}
+            <div className="bg-red-500/10 border border-red-500 rounded-lg p-3 text-xs text-red-500 font-mono flex items-center justify-center gap-2">
+              <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+              <span>{loginError}</span>
             </div>
           )}
 
@@ -224,8 +217,8 @@ export default function WriteThought() {
             </button>
           </form>
 
-          <Link href="/thoughts" className="text-center text-[10px] font-bold tracking-wider text-text-muted hover:text-text-primary uppercase transition-colors">
-            ← Back to thoughts
+          <Link href="/thoughts" className="inline-flex items-center justify-center gap-1.5 text-[10px] font-bold tracking-wider text-text-muted hover:text-text-primary uppercase transition-colors">
+            <ArrowLeft className="w-3.5 h-3.5" /> Back to thoughts
           </Link>
         </div>
       </div>
@@ -239,19 +232,19 @@ export default function WriteThought() {
       {/* Header section */}
       <header className="flex justify-between items-center py-6 sm:py-10 border-b border-border-main">
         <div className="flex flex-col gap-0.5">
-          <span className="text-[8px] font-bold tracking-widest text-accent uppercase bg-pill-bg px-2 py-0.5 rounded-full w-max">
+          <span className="text-[8px] font-bold tracking-widest text-accent-ink uppercase bg-surface px-2 py-0.5 rounded-full w-max">
             {editSlug ? `Editing: ${editSlug}` : 'Local Author Console'}
           </span>
-          <h1 className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-text-primary mt-1">
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-text-primary mt-1">
             {editSlug ? 'Modify Published Thought' : 'Publish a New Thought'}
           </h1>
         </div>
         <div className="flex items-center gap-4 sm:gap-8">
           <Link 
             href="/thoughts"
-            className="text-[10px] font-bold tracking-wider text-text-muted hover:text-text-primary uppercase transition-colors"
+            className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-wider text-text-muted hover:text-text-primary uppercase transition-colors"
           >
-            ← Cancel
+            <ArrowLeft className="w-3.5 h-3.5" /> Cancel
           </Link>
           <ThemeToggle />
         </div>
@@ -262,14 +255,21 @@ export default function WriteThought() {
         
         {/* Messages */}
         {message.text && (
-          <div className={`p-4 rounded-lg text-sm border font-mono ${
-            message.type === 'success' 
-              ? 'bg-green-500/10 border-green-500 text-green-500' 
+          <div className={`p-4 rounded-lg text-sm border font-mono flex items-center gap-2 ${
+            message.type === 'success'
+              ? 'bg-green-500/10 border-green-500 text-green-500'
               : message.type === 'loading'
                 ? 'bg-blue-500/10 border-blue-500 text-blue-500 animate-pulse'
                 : 'bg-red-500/10 border-red-500 text-red-500'
           }`}>
-            {message.type === 'success' ? '✓' : message.type === 'loading' ? '○' : '⚠'} {message.text}
+            {message.type === 'success' ? (
+              <Check className="w-4 h-4 flex-shrink-0" />
+            ) : message.type === 'loading' ? (
+              <Spinner className="w-4 h-4 flex-shrink-0 animate-spin" />
+            ) : (
+              <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+            )}
+            <span>{message.text}</span>
           </div>
         )}
 
@@ -312,7 +312,7 @@ export default function WriteThought() {
           </div>
 
           {/* View Toggles and Controls */}
-          <div className="flex justify-between items-center bg-pill-bg border border-border-main rounded-lg p-1.5 gap-4">
+          <div className="flex justify-between items-center bg-surface border border-border-main rounded-lg p-1.5 gap-4">
             <div className="flex gap-2 overflow-x-auto">
               <button 
                 type="button"
@@ -350,11 +350,16 @@ export default function WriteThought() {
                 disabled={isPublishing}
                 className="bg-text-primary text-bg-paper hover:bg-accent hover:text-bg-paper disabled:bg-text-muted font-bold text-xs uppercase tracking-wider px-5 py-1.5 rounded-md transition-colors flex items-center gap-1.5"
               >
-                {isPublishing 
-                  ? 'Saving changes...' 
-                  : editSlug 
-                    ? 'Save Changes ↗' 
-                    : 'Publish to Disk ↗'}
+                {isPublishing ? (
+                  <>
+                    <Spinner className="w-3.5 h-3.5 animate-spin" /> Saving changes...
+                  </>
+                ) : (
+                  <>
+                    {editSlug ? 'Save Changes' : 'Publish to Disk'}
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </>
+                )}
               </button>
             </div>
           </div>
@@ -380,18 +385,18 @@ export default function WriteThought() {
                 <div 
                   className="text-text-primary text-base leading-relaxed 
                     [&_p]:mb-6 [&_p]:text-text-muted [&_p]:leading-relaxed
-                    [&_h1]:font-serif [&_h1]:text-3xl sm:[&_h1]:text-4xl [&_h1]:font-bold [&_h1]:tracking-tight [&_h1]:text-text-primary [&_h1]:mt-8 [&_h1]:mb-6
-                    [&_h2]:font-serif [&_h2]:text-2xl sm:[&_h2]:text-3xl [&_h2]:font-semibold [&_h2]:tracking-tight [&_h2]:text-text-primary [&_h2]:mt-10 [&_h2]:mb-4
-                    [&_h3]:font-serif [&_h3]:text-xl sm:[&_h3]:text-2xl [&_h3]:font-semibold [&_h3]:tracking-tight [&_h3]:text-text-primary [&_h3]:mt-8 [&_h3]:mb-4
+                    [&_h1]:[&_h1]:text-3xl sm:[&_h1]:text-4xl [&_h1]:font-bold [&_h1]:tracking-tight [&_h1]:text-text-primary [&_h1]:mt-8 [&_h1]:mb-6
+                    [&_h2]:[&_h2]:text-2xl sm:[&_h2]:text-3xl [&_h2]:font-semibold [&_h2]:tracking-tight [&_h2]:text-text-primary [&_h2]:mt-10 [&_h2]:mb-4
+                    [&_h3]:[&_h3]:text-xl sm:[&_h3]:text-2xl [&_h3]:font-semibold [&_h3]:tracking-tight [&_h3]:text-text-primary [&_h3]:mt-8 [&_h3]:mb-4
                     [&_strong]:font-semibold [&_strong]:text-text-primary
                     [&_em]:italic
-                    [&_blockquote]:border-l-4 [&_blockquote]:border-accent [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:my-6 [&_blockquote]:text-text-muted
-                    [&_code]:font-mono [&_code]:text-xs sm:[&_code]:text-sm [&_code]:bg-pill-bg [&_code]:text-text-primary [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:border [&_code]:border-border-main
-                    [&_pre]:bg-pill-bg [&_pre]:p-4 sm:[&_pre]:p-6 [&_pre]:rounded-lg [&_pre]:border [&_pre]:border-border-main [&_pre]:mb-8 [&_pre]:overflow-x-auto [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:border-0
+                    [&_blockquote]:border-l-4 [&_blockquote]:border-accent-ink [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:my-6 [&_blockquote]:text-text-muted
+                    [&_code]:font-mono [&_code]:text-xs sm:[&_code]:text-sm [&_code]:bg-surface [&_code]:text-text-primary [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:border [&_code]:border-border-main
+                    [&_pre]:bg-surface [&_pre]:p-4 sm:[&_pre]:p-6 [&_pre]:rounded-lg [&_pre]:border [&_pre]:border-border-main [&_pre]:mb-8 [&_pre]:overflow-x-auto [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:border-0
                     [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-6 [&_ul]:text-text-muted [&_li]:mb-2
                     [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-6 [&_ol]:text-text-muted
                     [&_hr]:border-t [&_hr]:border-border-main [&_hr]:my-10
-                    [&_a]:text-accent [&_a]:underline hover:[&_a]:text-text-primary"
+                    [&_a]:text-accent-ink [&_a]:underline hover:[&_a]:text-text-primary"
                   dangerouslySetInnerHTML={{ __html: preview }}
                 />
               </div>

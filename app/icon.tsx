@@ -12,17 +12,18 @@ export default function Icon() {
       <div
         style={{
           fontSize: 13,
-          background: '#0e0e0e',
+          background: '#151312',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#ffffff',
-          fontFamily: 'serif',
+          color: '#c5ff41',
+          fontFamily: 'sans-serif',
           fontWeight: 'bold',
+          letterSpacing: '-0.04em',
           borderRadius: '30%',
-          border: '1px solid rgba(255, 255, 255, 0.15)',
+          border: '1px solid rgba(197, 255, 65, 0.25)',
         }}
       >
         EAE

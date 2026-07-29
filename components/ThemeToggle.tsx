@@ -1,55 +1,43 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
+import { Moon, Sun } from './Icons';
+
+/**
+ * Dark is the default canvas, so "light" is the opt-in class on <html>.
+ * The initial class is set before paint by the blocking script in the root
+ * layout; this component subscribes to that class and flips it.
+ */
+function subscribe(onStoreChange: () => void) {
+  const observer = new MutationObserver(onStoreChange);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class'],
+  });
+  return () => observer.disconnect();
+}
+
+const getSnapshot = () => document.documentElement.classList.contains('light');
+
+/** The server has no DOM and always renders the dark default. */
+const getServerSnapshot = () => false;
 
 export default function ThemeToggle() {
-  const [mounted, setMounted] = useState(false);
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
-    
-    setIsDark(shouldBeDark);
-    if (shouldBeDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
+  const isLight = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const toggleTheme = () => {
-    if (isDark) {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      setIsDark(false);
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      setIsDark(true);
-    }
+    const next = !document.documentElement.classList.contains('light');
+    document.documentElement.classList.toggle('light', next);
+    localStorage.setItem('theme', next ? 'light' : 'dark');
   };
-
-  if (!mounted) {
-    // Return placeholder markup with same dimensions to avoid layout shifts during hydration
-    return (
-      <div className="w-[42px] h-[42px] border border-border-main rounded-full" />
-    );
-  }
 
   return (
     <button
       onClick={toggleTheme}
-      className="border border-border-main w-[42px] h-[42px] rounded-full cursor-pointer flex items-center justify-center text-text-primary text-[1.1rem] hover:bg-pill-hover hover:rotate-12 transition-all duration-200"
-      aria-label="Toggle dark/light mode"
+      className="w-10 h-10 rounded-full border border-border-main flex items-center justify-center text-text-primary cursor-pointer hover:border-accent hover:text-accent-ink transition-colors duration-200"
+      aria-label={isLight ? 'Switch to dark mode' : 'Switch to light mode'}
     >
-      {isDark ? (
-        <span className="line-none">☀</span>
-      ) : (
-        <span className="line-none">☾</span>
-      )}
+      {isLight ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
     </button>
   );
 }

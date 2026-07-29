@@ -1,95 +1,94 @@
 import Link from 'next/link';
 import { getSortedThoughts } from '@/lib/thoughts';
-import ThemeToggle from '@/components/ThemeToggle';
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
+import { ArrowUpRight } from '@/components/Icons';
 
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-  title: "Thoughts — Emmanuel Andy Eze",
-  description: "Engineering write-ups, architecture patterns, and product strategies for building high-fidelity software systems.",
+  title: 'Thoughts — Emmanuel Eze',
+  description:
+    'Notes on building software that businesses actually use — written for anyone, not just engineers.',
 };
+
+const NAV_LINKS = [
+  { label: 'Work', href: '/#work' },
+  { label: 'Skills', href: '/#skills' },
+  { label: 'Experience', href: '/#experience' },
+  { label: 'Thoughts', href: '/thoughts' },
+];
 
 export default function ThoughtsIndex() {
   const thoughts = getSortedThoughts();
 
   return (
-    <div className="max-w-[1400px] mx-auto px-4 sm:px-8 w-full flex-grow flex flex-col">
-      
-      {/* Header Section */}
-      <header className="flex justify-between items-center py-6 sm:py-10 border-b border-border-main">
-        <div className="flex flex-col gap-0.5 sm:gap-1">
-          <Link href="/" className="font-serif text-2xl sm:text-4xl font-bold tracking-tight leading-none text-text-primary hover:text-accent transition-colors">
-            EMMANUEL ANDY EZE
-          </Link>
-          <span className="text-[9px] sm:text-[10px] font-bold tracking-widest text-text-muted uppercase">
-            Full-Stack Software Engineer
-          </span>
-        </div>
-        <div className="flex items-center gap-4 sm:gap-8">
-          <Link 
-            href="/"
-            className="text-[10px] font-bold tracking-wider text-text-muted hover:text-text-primary uppercase transition-colors"
-          >
-            ← Back to Folio
-          </Link>
-          <ThemeToggle />
-        </div>
-      </header>
+    <>
+      <SiteHeader links={NAV_LINKS} />
 
-      {/* Thoughts Section */}
-      <main className="py-16 sm:py-20 flex-grow">
-        <div className="flex justify-between items-baseline pb-4 mb-10 sm:mb-12 border-b border-border-main">
-          <h2 className="text-xs sm:text-sm font-bold tracking-widest text-text-primary uppercase">THOUGHTS</h2>
-          <span className="font-serif italic text-xs sm:text-sm text-text-muted">EDITORIAL INDEX</span>
+      <main className="flex-grow max-w-[1240px] mx-auto px-5 sm:px-8 w-full py-16 sm:py-28">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14 sm:mb-20">
+          <h1 className="display text-[15vw] sm:text-[9vw] lg:text-[7rem] text-text-primary">
+            Thoughts
+          </h1>
+          <p className="text-sm sm:text-base text-text-muted max-w-[340px] sm:text-right sm:pb-4">
+            Notes on building things that work — written to be readable whether
+            or not you write code.
+          </p>
         </div>
 
         {thoughts.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="font-serif italic text-lg text-text-muted">No thoughts published yet. Check back soon.</p>
+          <div className="border-t border-border-main py-24 text-center">
+            <p className="text-lg text-text-muted">
+              Nothing published yet. Check back soon.
+            </p>
           </div>
         ) : (
-          <div className="border-t border-border-main">
+          <div className="flex flex-col">
             {thoughts.map((thought) => (
-              <article 
-                key={thought.slug} 
-                className="border-b border-border-main hover:bg-card-hover transition-colors duration-200"
+              <article
+                key={thought.slug}
+                className="group border-t border-border-main last:border-b"
               >
-                <Link 
+                <Link
                   href={`/thoughts/${thought.slug}`}
-                  className="grid grid-cols-1 md:grid-cols-12 py-8 sm:py-12 items-baseline gap-4 md:gap-8 px-4 sm:px-6"
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-12 py-10 sm:py-14 items-start"
                 >
-                  {/* Date Column */}
-                  <div className="md:col-span-2 text-xs font-mono text-text-muted">
+                  <div className="lg:col-span-3 text-xs text-text-muted">
                     {new Date(thought.date).toLocaleDateString('en-US', {
                       day: 'numeric',
                       month: 'short',
-                      year: 'numeric'
+                      year: 'numeric',
                     })}
+                    {' · '}
+                    {thought.readingTime}
                   </div>
 
-                  {/* Title and Excerpt Column */}
-                  <div className="md:col-span-8 flex flex-col gap-2">
-                    <h3 className="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-text-primary hover:text-accent transition-colors leading-tight">
+                  <div className="lg:col-span-7 flex flex-col gap-3">
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight text-text-primary group-hover:text-accent-ink transition-colors">
                       {thought.title}
-                    </h3>
-                    <p className="text-sm sm:text-base text-text-muted leading-relaxed max-w-[800px]">
+                    </h2>
+                    <p className="text-base text-text-muted leading-relaxed max-w-[640px]">
                       {thought.description}
                     </p>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {thought.tags.map((tag) => (
-                        <span 
-                          key={tag} 
-                          className="text-[9px] font-semibold px-2 py-0.5 bg-pill-bg text-text-muted rounded-full"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                    {thought.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-2 mt-1">
+                        {thought.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-xs font-medium px-3 py-1 rounded-full border border-border-main text-text-muted"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
-                  {/* Read Time Column */}
-                  <div className="md:col-span-2 text-right text-xs font-semibold tracking-wider text-text-muted uppercase hidden md:block">
-                    {thought.readingTime}
+                  <div className="lg:col-span-2 lg:text-right">
+                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-text-primary group-hover:text-accent-ink transition-colors">
+                      Read it <ArrowUpRight className="w-3.5 h-3.5" />
+                    </span>
                   </div>
                 </Link>
               </article>
@@ -98,21 +97,7 @@ export default function ThoughtsIndex() {
         )}
       </main>
 
-      {/* Footer Section */}
-      <footer className="py-10 border-t border-border-main flex justify-between items-center w-full mt-auto">
-        <span className="text-[10px] font-semibold tracking-wider text-text-muted uppercase">
-          © 2026 EMMANUEL ANDY EZE.
-        </span>
-        <div className="flex gap-6 items-center">
-          <Link href="/" className="text-[10px] font-semibold tracking-wider text-text-muted hover:text-text-primary uppercase transition-colors">
-            Folio
-          </Link>
-          <a href="https://www.linkedin.com/in/emmanuel-eze-55833b216/" target="_blank" rel="noopener noreferrer" className="text-[10px] font-semibold tracking-wider text-text-muted hover:text-text-primary uppercase transition-colors">
-            LinkedIn
-          </a>
-        </div>
-      </footer>
-
-    </div>
+      <SiteFooter compact />
+    </>
   );
 }

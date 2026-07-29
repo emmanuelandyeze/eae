@@ -1,21 +1,34 @@
 import type { Metadata } from "next";
-import { Lora, Outfit } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
-
-const lora = Lora({
-  variable: "--font-serif",
-  subsets: ["latin"],
-});
 
 const outfit = Outfit({
   variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Emmanuel Eze — Full-Stack Engineer",
-  description: "Full-Stack Software Engineer specializing in Next.js, React Native, NestJS, and Laravel. Shifting concepts into scalable, production-grade applications.",
+  title: "Emmanuel Eze — Software Engineer",
+  description:
+    "I build the websites, apps and behind-the-scenes systems that businesses run on — online stores, booking tools, payment systems and custom software.",
 };
+
+/**
+ * Applies the saved theme before first paint. Dark is the default canvas, so a
+ * light-preferring visitor would otherwise get a dark flash on every load.
+ */
+const themeScript = `
+(function () {
+  try {
+    var saved = localStorage.getItem('theme');
+    var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    if (saved === 'light' || (!saved && prefersLight)) {
+      document.documentElement.classList.add('light');
+    }
+  } catch (e) {}
+})();
+`;
 
 export default function RootLayout({
   children,
@@ -25,9 +38,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${lora.variable} ${outfit.variable} h-full antialiased`}
+      className={`${outfit.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="min-h-full flex flex-col bg-bg-paper text-text-primary">
         {children}
       </body>

@@ -1,43 +1,51 @@
 @import "tailwindcss";
 
+/* -------------------------------------------------------------
+ * Palette — dark is the primary canvas, light is the alternate.
+ * `accent` is the lime fill (always pairs with dark ink on top);
+ * `accent-ink` is the readable accent for text, which has to go
+ * darker in light mode since lime on white is unreadable.
+ * ------------------------------------------------------------- */
 :root {
-  --background: #f7f7f3;        /* Warm paper off-white */
-  --foreground: #171716;        /* Deep charcoal */
-  --text-muted: #6e6e68;
-  --border-color: #dedede;
-  --border-muted: #e7e7e2;
-  --accent-color: #0d5c3a;      /* Deep forest green */
-  --pill-bg: #ecece6;
-  --pill-hover: #e2e2da;
-  --card-hover-bg: #fdfdfc;
+  --background: #151312;        /* Near-black, warm */
+  --surface: #1c1a18;           /* Raised card */
+  --surface-hover: #232120;
+  --foreground: #f7f5f3;
+  --text-muted: #998f8f;
+  --border-color: #2b2826;
+  --border-muted: #211f1d;
+  --accent-color: #c5ff41;      /* Lime */
+  --accent-ink: #c5ff41;
+  --accent-contrast: #151312;   /* Text laid on top of the lime */
 }
 
-/* Class-based theme toggling matching html.dark */
-html.dark {
-  --background: #121211;        /* Deep ink black */
-  --foreground: #f4f4f0;        /* Warm off-white */
-  --text-muted: #8c8c83;
-  --border-color: #2c2c29;
-  --border-muted: #20201e;
-  --accent-color: #4da677;      /* Bright sage green */
-  --pill-bg: #1c1c1a;
-  --pill-hover: #262624;
-  --card-hover-bg: #181817;
+html.light {
+  --background: #f6f6f3;
+  --surface: #ffffff;
+  --surface-hover: #efefea;
+  --foreground: #151312;
+  --text-muted: #6c6663;
+  --border-color: #e2e0db;
+  --border-muted: #ebe9e4;
+  --accent-color: #c5ff41;
+  --accent-ink: #4f7000;        /* Olive — lime is illegible on paper */
+  --accent-contrast: #151312;
 }
 
 @theme {
-  --font-serif: var(--font-serif);
   --font-sans: var(--font-sans);
-  
+  --font-display: var(--font-sans);
+
   --color-bg-paper: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
   --color-text-primary: var(--foreground);
   --color-text-muted: var(--text-muted);
   --color-border-main: var(--border-color);
   --color-border-sub: var(--border-muted);
   --color-accent: var(--accent-color);
-  --color-pill-bg: var(--pill-bg);
-  --color-pill-hover: var(--pill-hover);
-  --color-card-hover: var(--card-hover-bg);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-contrast: var(--accent-contrast);
 }
 
 body {
@@ -48,7 +56,28 @@ body {
 }
 
 /* -------------------------------------------------------------
- * Custom Marquee Animation
+ * Display type — the oversized stacked headings. Tight tracking
+ * and a sub-1 line height are what make the stack read as a block.
+ * ------------------------------------------------------------- */
+.display {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 0.86;
+}
+
+/* Small all-caps labels used above every section */
+.eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* -------------------------------------------------------------
+ * Marquee
  * ------------------------------------------------------------- */
 @keyframes marquee {
   0% { transform: translate3d(0, 0, 0); }
@@ -57,19 +86,32 @@ body {
 
 .animate-marquee {
   display: inline-block;
-  animation: marquee 35s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 
 /* -------------------------------------------------------------
- * Scroll Reveal Animation Classes
+ * Scroll reveal
  * ------------------------------------------------------------- */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal.active {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-marquee {
+    animation: none;
+  }
 }

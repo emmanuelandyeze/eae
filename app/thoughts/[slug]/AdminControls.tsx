@@ -37,7 +37,7 @@ export default function AdminControls({ slug }: AdminControlsProps) {
 
   return (
     <>
-      <div className="bg-pill-bg border border-border-main rounded-xl p-4 sm:p-6 mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs font-mono">
+      <div className="bg-surface border border-border-main rounded-xl p-4 sm:p-6 mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs font-mono">
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse"></span>
           <span className="font-bold text-text-primary uppercase tracking-wider">ADMIN MODE ACTIVE</span>
@@ -47,7 +47,7 @@ export default function AdminControls({ slug }: AdminControlsProps) {
         <div className="flex items-center gap-6">
           <Link 
             href={`/thoughts/write?edit=${slug}`}
-            className="font-bold text-accent border-b border-accent hover:text-text-primary hover:border-text-primary pb-0.5 transition-colors"
+            className="font-bold text-accent-ink border-b border-accent-ink hover:text-text-primary hover:border-text-primary pb-0.5 transition-colors"
           >
             Edit Thought
           </Link>
@@ -76,7 +76,7 @@ export default function AdminControls({ slug }: AdminControlsProps) {
               <span className="text-[10px] font-mono tracking-widest text-red-500 font-bold uppercase">
                 Confirm Deletion
               </span>
-              <h3 className="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-text-primary">
+              <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-text-primary">
                 Delete this Article?
               </h3>
               <p className="text-sm text-text-muted leading-relaxed">
@@ -87,7 +87,7 @@ export default function AdminControls({ slug }: AdminControlsProps) {
             <div className="flex justify-end gap-3 font-mono text-xs">
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2.5 border border-border-main hover:bg-pill-hover rounded-lg text-text-primary transition-colors cursor-pointer"
+                className="px-4 py-2.5 border border-border-main hover:bg-surface-hover rounded-lg text-text-primary transition-colors cursor-pointer"
               >
                 Cancel
               </button>

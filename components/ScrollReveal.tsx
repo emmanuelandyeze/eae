@@ -9,6 +9,7 @@ export default function ScrollReveal() {
       '.reveal-bio',
       '.reveal-stats',
       '.project-card-reveal',
+      '.skills-reveal',
       '.philosophy-card-reveal',
       '.timeline-reveal',
       '.footer-reveal',
