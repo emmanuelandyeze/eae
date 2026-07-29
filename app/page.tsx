@@ -3,7 +3,7 @@ import Image from 'next/image';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import ScrollReveal from '@/components/ScrollReveal';
-import { ArrowRight, ArrowUpRight } from '@/components/Icons';
+import { ArrowRight, ArrowUpRight, MapPin } from '@/components/Icons';
 import { metrics, projects, skillGroups } from '@/lib/projects';
 import { getSortedThoughts } from '@/lib/thoughts';
 
@@ -16,6 +16,17 @@ const marqueeItems = [
   'Admin dashboards',
   'WhatsApp automation',
   'Custom software',
+];
+
+/**
+ * The name is set as two justified lines pinned to one width, so both edges
+ * align. `w-[6.1em]` is font-size-relative, and sits just wider than the longer
+ * line's natural width (5.47em at 300) — enough to space the letters on both
+ * lines without either looking stretched.
+ */
+const NAME_LINES = [
+  { text: 'Emmanuel', weight: 'font-light' },
+  { text: 'Andy Eze', weight: 'font-semibold' },
 ];
 
 /**
@@ -56,13 +67,44 @@ export default function Home() {
       <main className="flex-grow">
         {/* ---------------------------------------------------------- Hero */}
         <section className="max-w-[1240px] mx-auto px-5 sm:px-8 pt-16 sm:pt-28 pb-16 sm:pb-24">
-          <div className="flex flex-col gap-8 reveal-hero-headline">
-            <span className="eyebrow">Emmanuel Andy Eze — Lagos, Nigeria</span>
-            <h1 className="display text-[17vw] sm:text-[12vw] lg:text-[9.5rem] text-text-primary">
-              Software
-              <br />
-              <span className="text-accent-ink">engineer</span>
-            </h1>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-8 sm:gap-10 lg:gap-14 reveal-hero-headline">
+            <div className="relative w-32 h-32 sm:w-44 sm:h-44 lg:w-56 lg:h-56 shrink-0 rounded-full overflow-hidden border border-border-main">
+              <Image
+                src="/portrait.webp"
+                alt="Emmanuel Andy Eze"
+                fill
+                sizes="(max-width: 640px) 128px, (max-width: 1024px) 176px, 224px"
+                preload
+                className="object-cover"
+              />
+            </div>
+
+            <div className="flex flex-col gap-3 sm:gap-4 min-w-0">
+              <h1
+                className="display text-[12.5vw] sm:text-[7.5vw] lg:text-[6.5rem] tracking-normal text-text-primary"
+                aria-label="Emmanuel Andy Eze"
+              >
+                {NAME_LINES.map(({ text, weight }) => (
+                  <span
+                    key={text}
+                    aria-hidden="true"
+                    className={`flex justify-between w-[6.1em] ${weight}`}
+                  >
+                    {[...text].map((char, i) => (
+                      <span key={i}>{char === ' ' ? ' ' : char}</span>
+                    ))}
+                  </span>
+                ))}
+              </h1>
+              <div className="flex flex-col gap-2">
+                <span className="text-2xl sm:text-3xl lg:text-[2.25rem] font-medium tracking-tight leading-none text-accent-ink">
+                  Software engineer
+                </span>
+                <span className="eyebrow inline-flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5" /> Lagos, Nigeria
+                </span>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mt-12 sm:mt-16 reveal-bio">
