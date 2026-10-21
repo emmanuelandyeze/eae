@@ -7,13 +7,13 @@ export interface Project {
   /** Two-digit index shown beside the name */
   num: string;
   name: string;
-  /** Plain-language sector, not a tech category */
+  /** Sector / domain */
   sector: string;
-  /** What it does, for someone who doesn't build software */
+  /** Strategic overview of the system and architectural problem solved */
   summary: string;
-  /** Three concrete things it does for the people using it */
+  /** Core architectural & delivery highlights */
   highlights: string[];
-  /** Named tools, kept short — the badge of proof, not the pitch */
+  /** Battle-tested stack powering the build */
   builtWith: string;
   status: string;
   links: ProjectLink[];
@@ -26,27 +26,27 @@ export interface Project {
   featured?: boolean;
 }
 
-const MAIL = 'mailto:emmanuel.andyeze@gmail.com?subject=';
+const SCOPE_MAIL = 'mailto:emmanuel.andyeze@gmail.com?subject=';
 
 export const projects: Project[] = [
   {
     num: '01',
     name: 'Tradeet',
-    sector: 'Small business tools',
+    sector: 'Conversational Commerce & Micro-ERP',
     summary:
-      'Lets a small business owner run the whole shop from WhatsApp. They send a message like they would to a friend — "sold 2 bags 15k" — and it records the sale, updates what is left in stock, and can send the customer a proper invoice. Nothing to download, nothing to learn.',
+      'Engineered an event-driven conversational OS that turns WhatsApp into a complete transactional point-of-sale and micro-ERP for merchants. Merchants record sales, manage inventory, and generate digital invoices via natural text messages without leaving WhatsApp.',
     highlights: [
-      'Record a sale by sending a message',
-      'Invoices that look professionally made',
-      'A simple dashboard showing how the business is doing',
+      'Event-driven webhook engine parsing natural-language sales in real time',
+      'Dynamic PDF invoice generation and automated customer dispatch',
+      'Multi-tenant merchant dashboard with live telemetry and inventory tracking',
     ],
-    builtWith: 'WhatsApp Business, Next.js, Node.js',
-    image: '/projects/tradeet.webp',
+    builtWith: 'WhatsApp Cloud API, Next.js, Node.js, Webhooks, PostgreSQL',
+    image: '/projects/tradeet-v2.webp',
     status: 'Live, with paying users',
     links: [
-      { label: 'Visit the site', href: 'https://tradeet.ng' },
+      { label: 'Visit the platform', href: 'https://tradeet.ng' },
       {
-        label: 'Try it on WhatsApp',
+        label: 'Test WhatsApp engine',
         href: 'https://wa.me/2348141898230?text=Hello%20Tradeet%2C%20I%20want%20to%20get%20started%20with%20my%20smart%20business%20OS!',
       },
     ],
@@ -55,229 +55,220 @@ export const projects: Project[] = [
   {
     num: '02',
     name: 'YAAAS Agency',
-    sector: 'Creative agency',
+    sector: 'Creative Roster & Asset Management',
     summary:
-      'The online home of an agency that represents African artists. Visitors browse the roster of artists, look through the artwork collection, and get in touch about a booking. Behind a private login, the agency adds artists, uploads work and publishes news themselves — they never have to call a developer to change a word.',
+      'Architected the digital platform and high-performance asset distribution hub for an international agency representing African creative talent. Built with a decoupled headless architecture, enabling non-technical agency staff to manage artist rosters and licensing portfolios autonomously.',
     highlights: [
-      'Artist profiles with their work and music links',
-      'A gallery visitors can filter by artist',
-      'A private dashboard the team runs on their own',
+      'Decoupled CMS architecture removing developer intervention for content operations',
+      'Optimized multimedia pipeline handling streaming music and high-res artwork',
+      'Role-based administrative portal with audit logs and media curation workflows',
     ],
-    builtWith: 'Next.js, MongoDB, Cloudinary',
+    builtWith: 'Next.js, MongoDB, Cloudinary CDN, Tailwind CSS',
     image: '/projects/yaaas.webp',
-    status: 'Live',
+    status: 'Live in production',
     links: [
       { label: 'Visit the site', href: 'https://yaaas.co' },
-      { label: 'Ask about this project', href: `${MAIL}Question%20about%20the%20YAAAS%20Agency%20project` },
+      { label: 'Discuss architecture', href: `${SCOPE_MAIL}Inquiry%20regarding%20YAAAS%20Agency%20Architecture` },
     ],
     featured: true,
   },
   {
     num: '03',
     name: 'Yunimall',
-    sector: 'Online shopping',
+    sector: 'Multi-Vendor Marketplace & Settlement',
     summary:
-      'A marketplace where many different sellers trade under one roof. A shopper fills a single basket with items from several shops and pays once — and the money is automatically split and sent to each seller.',
+      'Designed and shipped a multi-vendor marketplace engine featuring a unified shopping cart and automated payment splitting. Customers execute a single checkout transaction across multiple independent merchants, while the settlement engine calculates commissions and triggers automated merchant payouts.',
     highlights: [
-      'One basket, many sellers',
-      'Sellers paid out automatically',
-      'ID checks before a seller can trade',
+      'Unified multi-vendor checkout with automated payout splitting at settlement',
+      'Automated KYC onboarding pipeline verifying merchant identity before trading',
+      'Real-time order state machine with sub-merchant order fulfillment tracking',
     ],
-    builtWith: 'Next.js, Flutterwave, MongoDB',
+    builtWith: 'Next.js, Flutterwave Subaccounts, MongoDB, Node.js',
     image: '/projects/yunimall.webp',
-    status: 'Live',
+    status: 'Live in production',
     links: [
-      { label: 'Visit the site', href: 'https://app.yuni-mall.com' },
-      { label: 'Ask about this project', href: `${MAIL}Question%20about%20the%20Yunimall%20project` },
+      { label: 'Visit marketplace', href: 'https://app.yuni-mall.com' },
+      { label: 'Discuss architecture', href: `${SCOPE_MAIL}Inquiry%20regarding%20Yunimall%20Marketplace%20Architecture` },
     ],
   },
   {
     num: '04',
     name: 'Afrosoundtrack',
-    sector: 'Music',
+    sector: 'Music Publishing & Royalty Analytics',
     summary:
-      'A music publishing and licensing platform that helps African artists, songwriters, producers and session musicians earn from their work globally — and shows them on a live map where their songs are actually being played.',
+      'Built a global music publishing and rights management infrastructure connecting African artists and producers with global sync licensing. Features telemetry that tracks stream events and visualizes worldwide playback distribution on an interactive geographical telemetry engine.',
     highlights: [
-      'Earnings from around the world in one place',
-      'A live map of where the music is playing',
-      'A companion app for iPhone and Android',
+      'Interactive geospatial telemetry engine visualizing global track playback',
+      'Unified multi-currency royalty accounting and payout pipeline',
+      'Cross-platform mobile client for iOS and Android synced with web core',
     ],
-    builtWith: 'Next.js, React Native, PostgreSQL',
+    builtWith: 'Next.js, React Native, PostgreSQL, GIS Telemetry, REST APIs',
     image: '/projects/afrosoundtrack.webp',
-    status: 'Live',
+    status: 'Live in production',
     links: [
-      { label: 'Visit the site', href: 'https://afrosoundtrack.com' },
-      { label: 'Ask about this project', href: `${MAIL}Question%20about%20the%20Afrosoundtrack%20project` },
+      { label: 'Visit the platform', href: 'https://afrosoundtrack.com' },
+      { label: 'Discuss architecture', href: `${SCOPE_MAIL}Inquiry%20regarding%20Afrosoundtrack%20Architecture` },
     ],
   },
   {
     num: '05',
     name: 'AuditMe',
-    sector: 'Accounting',
+    sector: 'Regulated FinTech & Audit Workflow',
     summary:
-      'Matches companies that need their books audited with certified auditors, then keeps the job moving on a clear schedule. Documents go in securely at one end and a finished report comes out the other, inside a week.',
+      'Architected a secure workflow marketplace matching enterprises requiring statutory audits with licensed independent auditors. Features encrypted document staging, structured milestone pipelines, and audit progress tracking that compresses multi-week audits into a 7-day verified turnaround.',
     highlights: [
-      'A seven-day turnaround, tracked in the open',
-      'Documents exchanged securely',
-      'Both sides can see exactly where things stand',
+      'End-to-end encrypted document exchange pipeline with zero client data leakage',
+      'Time-boxed 7-day milestone engine with automated SLA breach escalations',
+      'Granular role-based access control (RBAC) separating auditors, clients, and QA',
     ],
-    builtWith: 'Next.js, Node.js, MongoDB',
+    builtWith: 'Next.js, Node.js, MongoDB, S3 Document Vault, RBAC',
     image: '/projects/auditme.webp',
-    status: 'Live',
+    status: 'Live in production',
     links: [
-      { label: 'Visit the site', href: 'https://auditme.com.ng' },
-      { label: 'Sign up as an auditor', href: 'https://app.auditme.com.ng/register-auditor' },
+      { label: 'Visit platform', href: 'https://auditme.com.ng' },
+      { label: 'Auditor portal', href: 'https://app.auditme.com.ng/register-auditor' },
     ],
   },
   {
     num: '06',
     name: 'Diagknos',
-    sector: 'Healthcare',
+    sector: 'HealthTech & Cold-Chain Logistics',
     summary:
-      'Lets a patient book any of more than a hundred lab tests online and have a certified professional come to their home or office to take the sample — then tracks it, temperature-controlled, all the way to the accredited lab and back as a result. No queues, no lost reports.',
+      'Engineered an on-demand medical diagnostics platform coordinating doorstep phlebotomy sampling with accredited laboratories. Integrates real-time dispatch routing, patient scheduling across 100+ medical tests, and temperature-verified cold-chain chain of custody tracking from collection to pathology report release.',
     highlights: [
-      'Over 100 tests, booked without a phone call',
-      'Sample collected at your home or office',
-      'Every stage tracked, from booking to result',
+      'Real-time phlebotomist dispatch and geofenced routing engine',
+      'Chain-of-custody tracking verifying sample integrity and cold-chain compliance',
+      'Automated lab result release engine with HIPAA-aligned patient notifications',
     ],
-    builtWith: 'Next.js, Google Maps, Twilio',
+    builtWith: 'Next.js, Google Maps Platform, Twilio Telephony, Node.js',
     image: '/projects/diagknos.webp',
-    status: 'Live',
+    status: 'Live in production',
     links: [
-      { label: 'Visit the site', href: 'https://diagknos.com' },
-      { label: 'Ask about this project', href: `${MAIL}Question%20about%20the%20Diagknos%20project` },
+      { label: 'Visit platform', href: 'https://diagknos.com' },
+      { label: 'Discuss architecture', href: `${SCOPE_MAIL}Inquiry%20regarding%20Diagknos%20Architecture` },
     ],
   },
   {
     num: '07',
-    name: 'ServiceDome',
-    sector: 'Local services',
+    name: 'Pepcode',
+    sector: 'SaaS Accounting & Inventory Systems',
     summary:
-      'A phone app that connects electricians, plumbers, cleaners and other local professionals with customers nearby. Once a job is accepted, the customer can watch it progress in real time rather than wondering whether anyone is coming.',
+      'Engineered an intuitive SaaS bookkeeping and inventory management platform designed for fast-paced retail businesses. Automates stock decrementing upon sale, computes real-time profit margins, and generates compliant fiscal receipts, eliminating month-end accounting reconciliation bottlenecks.',
     highlights: [
-      'Matches you with professionals close by',
-      'Watch the job progress live',
-      'Fast, smooth and simple to use',
+      'Real-time inventory state management with automated reorder alerts',
+      'Instant fiscal invoice and receipt generation pipeline',
+      'Daily ledger reconciliation engine providing immediate gross margin visibility',
     ],
-    builtWith: 'React Native, Node.js, MongoDB',
-    status: 'Client project, private',
-    links: [{ label: 'Ask about this project', href: `${MAIL}Question%20about%20the%20ServiceDome%20project` }],
+    builtWith: 'React, NestJS, MongoDB, REST APIs, Tailwind CSS',
+    image: '/projects/pepcode.webp',
+    status: 'Live in production',
+    links: [
+      { label: 'Visit platform', href: 'https://pepcodeinc.com/' },
+      { label: 'Discuss architecture', href: `${SCOPE_MAIL}Inquiry%20regarding%20Pepcode%20Architecture` },
+    ],
   },
   {
     num: '08',
-    name: 'Pepcode',
-    sector: 'Retail & payments',
+    name: 'Owa by Pepcode',
+    sector: 'Financial Inclusion & Field Agent Ops',
     summary:
-      'Daily bookkeeping for small businesses that do not have an accountant. It tracks what goes out, keeps count of stock, and turns a sale into a proper invoice — so the books are already done at closing time instead of piling up for month end.',
+      'Built a field-agent operations platform extending formal ledger keeping to informal market traders without smartphones. Mobile field agents log transactions on-site via an offline-first data capture tool, compiling audited transaction histories that commercial banks accept for credit underwriting.',
     highlights: [
-      'Expenses tracked as they happen',
-      'Stock counted without a stocktake',
-      'Invoices generated in seconds',
+      'Offline-resilient field agent data capture interface for low-connectivity markets',
+      'Bank-acceptable financial statement generation for unbanked micro-enterprises',
+      'High-throughput reconciliation pipeline transforming paper ledgers into verified databases',
     ],
-    builtWith: 'React, NestJS, MongoDB',
-    image: '/projects/pepcode.webp',
-    status: 'Live',
+    builtWith: 'Next.js, Google Sheets API Integration, Tailwind CSS',
+    image: '/projects/owa.webp',
+    status: 'Live in production',
     links: [
-      { label: 'Visit the site', href: 'https://pepcodeinc.com/' },
-      { label: 'Ask about this project', href: `${MAIL}Question%20about%20the%20Pepcode%20project` },
+      { label: 'Visit platform', href: 'https://owabypepcode.com.ng' },
+      { label: 'Discuss architecture', href: `${SCOPE_MAIL}Inquiry%20regarding%20Owa%20Architecture` },
     ],
   },
   {
     num: '09',
-    name: 'Owa by Pepcode',
-    sector: 'Financial inclusion',
+    name: 'HT Legal Advisory',
+    sector: 'LegalTech & Client Intake Engine',
     summary:
-      'Bookkeeping for market traders who do not use a smartphone. A trained agent visits and logs their sales and expenses for them, so that for the first time they have proper records — the kind a bank will accept when they apply for a loan.',
+      'Designed and deployed a modern client intake and knowledge publishing engine for a corporate law practice. Features automated consultation calendar booking, structured intake conflict checking, and a headless legal advisory publishing pipeline managed directly by partners.',
     highlights: [
-      'Works for traders without a smartphone',
-      'An agent does the record-keeping in person',
-      'Records a bank will actually accept',
+      'Automated client intake workflow with zero scheduling friction',
+      'Headless CMS infrastructure allowing legal partners to publish insights independently',
+      'Structured enquiry triage pipeline protecting partner billable hours',
     ],
-    builtWith: 'Next.js, Google Sheets, Tailwind',
-    image: '/projects/owa.webp',
-    status: 'Live',
+    builtWith: 'Next.js, Sanity Headless CMS, MongoDB, Tailwind CSS',
+    image: '/projects/htlegal.webp',
+    status: 'Live in production',
     links: [
-      { label: 'Visit the site', href: 'https://owabypepcode.com.ng' },
-      { label: 'Ask about this project', href: `${MAIL}Question%20about%20the%20Owa%20project` },
+      { label: 'Visit site', href: 'https://htlegal.com.ng' },
+      { label: 'Discuss architecture', href: `${SCOPE_MAIL}Inquiry%20regarding%20HT%20Legal%20Architecture` },
     ],
   },
   {
     num: '10',
-    name: 'HT Legal Advisory',
-    sector: 'Legal',
-    summary:
-      'A law firm website that does real work: it takes enquiries from would-be clients, lets the team publish legal articles, and books consultations straight into the calendar. The lawyers update all of it themselves.',
-    highlights: [
-      'New client enquiries handled online',
-      'Consultations booked without back-and-forth',
-      'The team publishes their own articles',
-    ],
-    builtWith: 'Next.js, Sanity, MongoDB',
-    image: '/projects/htlegal.webp',
-    status: 'Live',
-    links: [
-      { label: 'Visit the site', href: 'https://htlegal.com.ng' },
-      { label: 'Ask about this project', href: `${MAIL}Question%20about%20the%20HT%20Legal%20project` },
-    ],
-  },
-  {
-    num: '11',
     name: 'Arc9 Consult',
-    sector: 'Architecture & design',
+    sector: 'Architecture Portfolio & Project Pipeline',
     summary:
-      'The online home of a Nigerian architecture practice that designs buildings, fits out interiors and runs projects on site. Visitors browse completed work, read what each service actually involves, and start a conversation on WhatsApp instead of filling in a long form and waiting.',
+      'Architected a high-converting digital portal for a premier architectural and interior design firm. Combines lightning-fast visual project galleries with friction-free direct WhatsApp lead qualification routing, converting casual architectural inquiries into active consultations.',
     highlights: [
-      'A gallery of finished buildings and interiors',
-      'A clear page for each of the three services',
-      'Enquiries go straight to WhatsApp',
+      'High-resolution imagery optimization pipeline maintaining sub-second load times',
+      'Direct conversion routing driving inquiries into qualified WhatsApp lead channels',
+      'Structured portfolio taxonomy categorizing commercial, residential, and interior contracts',
     ],
-    builtWith: 'Next.js, Tailwind CSS',
+    builtWith: 'Next.js, Tailwind CSS, Vercel Edge Network',
     image: '/projects/arc9.webp',
-    status: 'Live',
+    status: 'Live in production',
     links: [
-      { label: 'Visit the site', href: 'https://www.arc9consult.com/' },
-      { label: 'Ask about this project', href: `${MAIL}Question%20about%20the%20Arc9%20Consult%20project` },
+      { label: 'Visit site', href: 'https://www.arc9consult.com/' },
+      { label: 'Discuss architecture', href: `${SCOPE_MAIL}Inquiry%20regarding%20Arc9%20Architecture` },
     ],
   },
 ];
 
 export interface SkillGroup {
   title: string;
-  /** What this actually means for the person paying for it */
+  /** Strategic blurb explaining the architectural value */
   blurb: string;
   items: string[];
 }
 
 export const skillGroups: SkillGroup[] = [
   {
-    title: 'Websites & web apps',
-    blurb: 'The thing your customers see. Fast, works on a phone, and easy to find on Google.',
-    items: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+    title: 'Frontend & Full-Stack Systems',
+    blurb:
+      'Fast, accessible, and reactive user interfaces built to scale. Server-rendered where speed matters, reactive where interactivity counts.',
+    items: ['TypeScript', 'Next.js (App Router)', 'React', 'Tailwind CSS', 'shadcn/ui'],
   },
   {
-    title: 'Phone apps',
-    blurb: 'One app that runs on both iPhone and Android, so you are not paying to build it twice.',
-    items: ['React Native', 'Expo'],
+    title: 'Backend & Distributed APIs',
+    blurb:
+      'Clean domain modeling, scalable microservices, and modular REST & GraphQL APIs designed to handle data integrity and thousands of concurrent users.',
+    items: ['Node.js', 'NestJS', 'Python', 'PostgreSQL', 'Redis', 'Prisma / Drizzle'],
   },
   {
-    title: 'The engine room',
-    blurb: 'The part nobody sees — where your data lives and the rules of your business are enforced.',
-    items: ['Node.js', 'NestJS', 'Express', 'MongoDB', 'PostgreSQL'],
+    title: 'Cloud & Infrastructure',
+    blurb:
+      'Resilient, cost-controlled cloud infrastructure with automated CI/CD pipelines, containerization, and zero-downtime rolling deployments.',
+    items: ['AWS (ECS, RDS, S3)', 'Supabase', 'Docker', 'Vercel', 'GitHub Actions CI/CD'],
   },
   {
-    title: 'Taking payments',
-    blurb: 'Getting money in safely, and splitting it out to the right people automatically.',
-    items: ['Flutterwave', 'Card terminals', 'Automatic payouts'],
+    title: 'Payments & Settlement Engines',
+    blurb:
+      'Idempotent transactional architectures with multi-currency checkout, automated payout splits, and fail-safe webhook reconciliation.',
+    items: ['Stripe', 'Flutterwave', 'Idempotent Webhooks', 'Automated Payouts', 'Escrow Systems'],
   },
   {
-    title: 'Messaging & reminders',
-    blurb: 'Reaching customers where they already are, and cutting down on no-shows.',
-    items: ['WhatsApp Business', 'Twilio SMS', 'Email'],
+    title: 'Event-Driven & Async Pipelines',
+    blurb:
+      'Background worker queues, transactional communication, and automated messaging pipelines that keep core systems non-blocking and responsive.',
+    items: ['WhatsApp Cloud API', 'Twilio SMS & Voice', 'Redis Upstash Queues', 'Resend Email'],
   },
   {
-    title: 'Content you control',
-    blurb: 'A private dashboard so your team can change text, prices and images without calling me.',
-    items: ['Custom dashboards', 'Sanity', 'Cloudinary'],
+    title: 'Governance & Investor Diligence',
+    blurb:
+      'Enterprise-grade security controls, role-based access (RBAC), end-to-end telemetry, and clean repo standards ready for institutional audits.',
+    items: ['Role-Based Access (RBAC)', 'Multi-tenant Isolation', 'Sentry Observability', 'End-to-End Testing'],
   },
 ];
 
@@ -288,12 +279,24 @@ export interface Metric {
 }
 
 export const metrics: Metric[] = [
-  { value: '12+', label: 'Products shipped', note: 'Built, launched and handed over' },
-  { value: '11', label: 'Featured below', note: '10 of them running live today' },
+  {
+    value: '12+',
+    label: 'Products shipped',
+    note: 'Scalable production systems built 0 to 1',
+  },
+  {
+    value: '6–8',
+    label: 'Weeks to launch',
+    note: 'Ruthless scoping and rapid sprint execution',
+  },
   {
     value: '8',
-    label: 'Industries served',
-    note: 'Finance, retail, health, law, music, creative, architecture, local services',
+    label: 'Sectors architected',
+    note: 'Fintech, HealthTech, B2B SaaS, Marketplaces',
   },
-  { value: '5', label: 'Years doing this', note: 'Independent since 2021' },
+  {
+    value: '10',
+    label: 'Live in production',
+    note: 'Active, stable, and battle-tested by real users',
+  },
 ];

@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const outfit = Outfit({
+const outfit = localFont({
+  src: "../public/fonts/Outfit-Variable.woff2",
   variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+  weight: "100 900",
 });
 
 export const metadata: Metadata = {
-  title: "Emmanuel Eze — Software Engineer",
+  title: "Emmanuel Eze — Technical Partner & Product Architect",
   description:
-    "I build the websites, apps and behind-the-scenes systems that businesses run on — online stores, booking tools, payment systems and custom software.",
+    "Technical Partner to early-stage founders. I architect, scope, and ship production-grade 0-to-1 MVPs in 6–8 weeks.",
 };
 
 /**

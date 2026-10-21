@@ -34,10 +34,14 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="w-10 h-10 rounded-full border border-border-main flex items-center justify-center text-text-primary cursor-pointer hover:border-accent hover:text-accent-ink transition-colors duration-200"
+      className="group w-10 h-10 rounded-full border border-border-main flex items-center justify-center text-text-primary cursor-pointer hover:border-accent hover:text-accent-ink hover:scale-105 active:scale-95 transition-all duration-300"
       aria-label={isLight ? 'Switch to dark mode' : 'Switch to light mode'}
     >
-      {isLight ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+      {isLight ? (
+        <Moon className="w-4 h-4 transition-transform duration-500 group-hover:-rotate-12" />
+      ) : (
+        <Sun className="w-4 h-4 transition-transform duration-500 group-hover:rotate-45" />
+      )}
     </button>
   );
 }

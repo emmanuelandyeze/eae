@@ -7,14 +7,15 @@ import { ArrowUpRight } from '@/components/Icons';
 export const dynamic = 'force-dynamic';
 
 export const metadata = {
-  title: 'Thoughts — Emmanuel Eze',
+  title: 'Architectural Notes & Insights — Emmanuel Eze',
   description:
-    'Notes on building software that businesses actually use — written for anyone, not just engineers.',
+    'Notes on system architecture, venture-grade engineering, and rapid 0-to-1 execution.',
 };
 
 const NAV_LINKS = [
-  { label: 'Work', href: '/#work' },
-  { label: 'Skills', href: '/#skills' },
+  { label: 'Selected Work', href: '/#work' },
+  { label: 'Stack & Systems', href: '/#skills' },
+  { label: 'Practice Areas', href: '/#practice' },
   { label: 'Experience', href: '/#experience' },
   { label: 'Thoughts', href: '/thoughts' },
 ];

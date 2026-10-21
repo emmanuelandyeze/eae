@@ -48,6 +48,10 @@ html.light {
   --color-accent-contrast: var(--accent-contrast);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
@@ -90,6 +94,12 @@ body {
 .animate-marquee {
   display: inline-block;
   animation: marquee 40s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover,
+.group:hover .animate-marquee {
+  animation-play-state: paused;
 }
 
 /* -------------------------------------------------------------
@@ -97,9 +107,10 @@ body {
  * ------------------------------------------------------------- */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(24px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
 
 .reveal.active {
@@ -107,14 +118,86 @@ body {
   transform: translateY(0);
 }
 
+/* Stagger child items in grid reveal sections */
+.reveal-stats > div,
+.skills-reveal > div,
+.philosophy-card-reveal > div {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-stats.active > div,
+.skills-reveal.active > div,
+.philosophy-card-reveal.active > div {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stats > div:nth-child(1),
+.philosophy-card-reveal > div:nth-child(1),
+.skills-reveal > div:nth-child(1) { transition-delay: 0ms; }
+
+.reveal-stats > div:nth-child(2),
+.philosophy-card-reveal > div:nth-child(2),
+.skills-reveal > div:nth-child(2) { transition-delay: 90ms; }
+
+.reveal-stats > div:nth-child(3),
+.philosophy-card-reveal > div:nth-child(3),
+.skills-reveal > div:nth-child(3) { transition-delay: 180ms; }
+
+.reveal-stats > div:nth-child(4),
+.philosophy-card-reveal > div:nth-child(4),
+.skills-reveal > div:nth-child(4) { transition-delay: 270ms; }
+
+.skills-reveal > div:nth-child(5) { transition-delay: 360ms; }
+.skills-reveal > div:nth-child(6) { transition-delay: 450ms; }
+
+/* Subtle pulse glow */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.04); }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+/* -------------------------------------------------------------
+ * Theme-aware visibility utilities
+ * ------------------------------------------------------------- */
+.dark-only {
+  display: block;
+}
+html.light .dark-only {
+  display: none !important;
+}
+
+.light-only {
+  display: none !important;
+}
+html.light .light-only {
+  display: block !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal-stats > div,
+  .skills-reveal > div,
+  .philosophy-card-reveal > div {
     opacity: 1;
     transform: none;
     transition: none;
   }
 
-  .animate-marquee {
+  .animate-marquee,
+  .animate-glow-pulse {
     animation: none;
   }
 }

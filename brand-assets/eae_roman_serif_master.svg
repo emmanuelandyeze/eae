@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%" fill="none">
+  <!-- EAE Roman Serif Interlocking Monogram (True Reference Replica) -->
+  <defs>
+    <filter id="debossShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="1" dy="2" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.9"/>
+      <feDropShadow dx="-0.5" dy="-0.5" stdDeviation="0.8" flood-color="#ffffff" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <g id="eae-monogram-mark" fill="currentColor">
+    <!-- LEFT 'E' -->
+    <!-- Left E: Vertical Stem -->
+    <path d="M 140 100 L 175 100 L 175 280 L 140 280 L 140 268 L 150 268 L 150 112 L 140 112 Z"/>
+    
+    <!-- Left E: Top Arm & Terminal -->
+    <path d="M 165 100 L 235 100 L 235 132 L 222 132 L 220 114 L 175 114 L 175 100 Z"/>
+    
+    <!-- Left E: Middle Arm -->
+    <path d="M 165 180 L 220 180 L 220 195 L 210 195 L 208 189 L 175 189 L 175 180 Z"/>
+    
+    <!-- Left E: Bottom Arm (Extends through to anchor base of A) -->
+    <path d="M 150 266 L 245 266 L 245 245 L 257 245 L 257 280 L 150 280 Z"/>
+
+    <!-- CENTER 'A' -->
+    <!-- A: Apex Head Serif -->
+    <path d="M 280 100 L 322 100 L 322 107 L 312 107 L 290 107 L 280 107 Z"/>
+    
+    <!-- A: Left Heavy Diagonal Leg (Interlocking over/through left E) -->
+    <path d="M 296 105 L 314 105 L 228 280 L 202 280 L 202 272 L 214 272 Z"/>
+    
+    <!-- A: Right Diagonal Leg (Acts as the shared stem for the Right E) -->
+    <path d="M 306 105 L 320 105 L 388 272 L 398 272 L 398 280 L 368 280 L 368 272 L 375 272 Z"/>
+    
+    <!-- A: Crossbar -->
+    <path d="M 252 216 L 350 216 L 350 224 L 248 224 Z"/>
+
+    <!-- RIGHT 'E' (Branching directly from the diagonal of A) -->
+    <!-- Right E: Top Arm & Terminal -->
+    <path d="M 324 122 L 405 122 L 405 154 L 392 154 L 390 135 L 330 135 Z"/>
+    
+    <!-- Right E: Middle Arm -->
+    <path d="M 353 194 L 400 194 L 400 210 L 390 210 L 388 203 L 357 203 Z"/>
+    
+    <!-- Right E: Bottom Arm & Upward Terminal -->
+    <path d="M 374 256 L 420 256 L 420 280 L 364 280 L 364 266 L 408 266 L 408 240 L 420 240 L 420 280 Z"/>
+  </g>
+</svg>

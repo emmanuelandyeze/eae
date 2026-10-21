@@ -13,31 +13,31 @@ export default function SiteFooter({ compact = false }: { compact?: boolean }) {
       <div className="max-w-[1240px] mx-auto px-5 sm:px-8">
         {!compact && (
           <div className="py-20 sm:py-32 flex flex-col gap-10 footer-reveal">
-            <span className="eyebrow">Available for new work</span>
+            <span className="eyebrow">Taking on select 0-to-1 venture builds</span>
             <h2 className="display text-[16vw] sm:text-[11vw] lg:text-[8.5rem] text-text-primary">
-              Let&apos;s work
+              Ready to ship
               <br />
-              <span className="text-accent-ink">together</span>
+              <span className="text-accent-ink">in 6–8 weeks?</span>
             </h2>
-            <p className="text-lg sm:text-xl text-text-muted max-w-[560px] leading-relaxed">
-              Have something you want built, or an idea you&apos;re still figuring out?
-              Tell me about it — the first conversation is free and there&apos;s no
-              obligation either way.
+            <p className="text-lg sm:text-xl text-text-muted max-w-[620px] leading-relaxed">
+              Planning a new build or need your system architecture scoped? Let&apos;s eliminate
+              vanity features, architect a resilient foundation, and launch your product into
+              users&apos; hands without burning runway.
             </p>
             <div className="flex flex-wrap gap-4">
               <a
-                href="mailto:emmanuel.andyeze@gmail.com?subject=Project%20Enquiry"
-                className="inline-flex items-center gap-2 bg-accent text-accent-contrast px-6 py-3.5 rounded-full text-sm font-semibold hover:opacity-85 transition-opacity"
-              >
-                Send me an email <ArrowUpRight className="w-4 h-4" />
-              </a>
-              <a
-                href="https://wa.me/2347034343002"
+                href="https://wa.me/2347034343002?text=Hi%20Emmanuel%2C%20I'd%20like%20to%20scope%20an%20MVP%20sprint%20for%20my%20product"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-border-main text-text-primary px-6 py-3.5 rounded-full text-sm font-semibold hover:border-accent hover:text-accent-ink transition-colors"
+                className="group inline-flex items-center gap-2 bg-accent text-accent-contrast px-6 py-3.5 rounded-full text-sm font-semibold hover:shadow-lg hover:shadow-accent/20 active:scale-[0.98] transition-all duration-200"
               >
-                Message on WhatsApp <ArrowUpRight className="w-4 h-4" />
+                Scope on WhatsApp <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+              <a
+                href="mailto:emmanuel.andyeze@gmail.com?subject=MVP%20Sprint%20Scoping%20Inquiry&body=Hi%20Emmanuel%2C%0A%0AI'm%20planning%20a%20new%20build%20and%20would%20like%20to%20scope%20our%20MVP%20sprint."
+                className="group inline-flex items-center gap-2 border border-border-main text-text-primary px-6 py-3.5 rounded-full text-sm font-semibold hover:border-accent hover:text-accent-ink hover:bg-surface/50 active:scale-[0.98] transition-all duration-200"
+              >
+                Email Product Brief <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>
           </div>
@@ -45,7 +45,7 @@ export default function SiteFooter({ compact = false }: { compact?: boolean }) {
 
         <div className="py-8 border-t border-border-main flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <span className="text-xs text-text-muted">
-            © {YEAR} Emmanuel Andy Eze
+            © {YEAR} Emmanuel Andy Eze · Technical Partner
           </span>
           <div className="flex flex-wrap gap-6 items-center">
             <a

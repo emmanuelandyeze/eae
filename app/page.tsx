@@ -7,17 +7,58 @@ import { ArrowRight, ArrowUpRight, MapPin } from '@/components/Icons';
 import { metrics, projects, skillGroups } from '@/lib/projects';
 import { getSortedThoughts } from '@/lib/thoughts';
 
-const marqueeItems = [
-  'Websites',
-  'Phone apps',
-  'Online stores',
-  'Taking payments',
-  'Booking systems',
-  'Admin dashboards',
-  'WhatsApp automation',
-  'Custom software',
+const clientLogos = [
+  {
+    name: 'Tradeet',
+    srcDark: '/clients/tradeet_dark.png',
+    srcLight: '/clients/tradeet_light.png',
+  },
+  {
+    name: 'YAAAS Agency',
+    srcDark: '/clients/yaaas_dark.png',
+    srcLight: '/clients/yaaas_light.png',
+  },
+  {
+    name: 'Yunimall',
+    srcDark: '/clients/yunimall_dark.png',
+    srcLight: '/clients/yunimall_light.png',
+  },
+  {
+    name: 'Afrosoundtrack',
+    srcDark: '/clients/afrosoundtrack_dark.png',
+    srcLight: '/clients/afrosoundtrack_light.png',
+  },
+  {
+    name: 'AuditMe',
+    srcDark: '/clients/auditme_dark.png',
+    srcLight: '/clients/auditme_light.png',
+  },
+  {
+    name: 'Diagknos',
+    srcDark: '/clients/diagknos_dark.png',
+    srcLight: '/clients/diagknos_light.png',
+  },
+  {
+    name: 'Pepcode',
+    srcDark: '/clients/pepcode_dark.png',
+    srcLight: '/clients/pepcode_light.png',
+  },
+  {
+    name: 'Owa by Pepcode',
+    srcDark: '/clients/owa_dark.png',
+    srcLight: '/clients/owa_light.png',
+  },
+  {
+    name: 'HT Legal',
+    srcDark: '/clients/htlegal_dark.png',
+    srcLight: '/clients/htlegal_light.png',
+  },
+  {
+    name: 'Arc9 Consult',
+    srcDark: '/clients/arc9_dark.png',
+    srcLight: '/clients/arc9_light.png',
+  },
 ];
-
 
 /**
  * Cell dividers for the metrics grid: two columns on mobile, four on desktop.
@@ -33,16 +74,20 @@ const METRIC_BORDERS = [
 
 const principles = [
   {
-    title: 'Built to last',
-    body: 'I build software the way you would want a house built — proper foundations, so that adding a room in two years does not mean knocking the whole thing down. It costs a little more attention up front and saves a great deal later.',
+    title: '0-to-1 System Architecture',
+    body: 'Designing clean, multi-tenant database models, secure APIs, and modular codebases that scale cleanly to your first 50,000 users without expensive rewrites. Proper architectural foundations mean future features take days instead of months.',
   },
   {
-    title: 'Careful with money',
-    body: 'When a product handles payments, close enough is not good enough. Before a single naira moves, I have tested every path it can take — including the ones where the network drops halfway through.',
+    title: 'Aggressive MVP Scoping',
+    body: 'Over 60% of features in initial product roadmaps are vanity items that do not need to exist on launch day. I ruthlessly isolate your core value loop so you can ship a production-grade product in weeks rather than quarters.',
   },
   {
-    title: 'Made for the person using it',
-    body: 'The cleverest system in the world fails if the person on the other end finds it confusing. I design for the shop owner with one bar of signal, not for other engineers.',
+    title: 'Production-Grade Delivery',
+    body: 'Full-stack engineering built with enterprise-grade auth (RBAC), rock-solid payment flows, background worker queues, and automated CI/CD pipelines. Never gamble on brittle prototypes that break when real traffic arrives.',
+  },
+  {
+    title: 'Due Diligence & Hiring Support',
+    body: 'When you hit the inflection point to hire in-house, you receive battle-tested repositories, automated test suites, and clean documentation. I help write engineering role specs, evaluate candidates, and hand over the codebase smoothly.',
   },
 ];
 
@@ -56,17 +101,23 @@ export default function Home() {
 
       <main className="flex-grow">
         {/* ---------------------------------------------------------- Hero */}
-        <section className="max-w-[1240px] mx-auto px-5 sm:px-8 pt-16 sm:pt-28 pb-16 sm:pb-24">
+        <section className="relative max-w-[1240px] mx-auto px-5 sm:px-8 pt-16 sm:pt-28 pb-16 sm:pb-24">
+          {/* Subtle ambient light glow */}
+          <div className="pointer-events-none absolute -top-24 right-0 w-96 h-96 rounded-full bg-accent/[0.035] blur-[140px] animate-glow-pulse" aria-hidden="true" />
+
           <div className="flex flex-col sm:flex-row sm:items-center gap-8 sm:gap-10 lg:gap-14 reveal-hero-headline">
-            <div className="relative w-32 h-32 sm:w-44 sm:h-44 lg:w-56 lg:h-56 shrink-0 rounded-full overflow-hidden border border-border-main">
-              <Image
-                src="/portrait.webp"
-                alt="Emmanuel Andy Eze"
-                fill
-                sizes="(max-width: 640px) 128px, (max-width: 1024px) 176px, 224px"
-                preload
-                className="object-cover"
-              />
+            <div className="relative group shrink-0">
+              <div className="absolute -inset-1 rounded-full bg-accent/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              <div className="relative w-32 h-32 sm:w-44 sm:h-44 lg:w-56 lg:h-56 rounded-full overflow-hidden border border-border-main transition-transform duration-500 ease-out group-hover:scale-[1.02]">
+                <Image
+                  src="/portrait.webp"
+                  alt="Emmanuel Andy Eze"
+                  fill
+                  sizes="(max-width: 640px) 128px, (max-width: 1024px) 176px, 224px"
+                  preload
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+              </div>
             </div>
 
             <div className="flex flex-col gap-3 sm:gap-4 min-w-0">
@@ -79,10 +130,18 @@ export default function Home() {
               </h1>
               <div className="flex flex-col gap-2">
                 <span className="text-2xl sm:text-3xl lg:text-[2.25rem] font-medium tracking-tight leading-none text-accent-ink">
-                  Software engineer
+                  Technical Partner
                 </span>
-                <span className="eyebrow inline-flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5" /> Lagos, Nigeria
+                <span className="eyebrow inline-flex items-center gap-2">
+                  <MapPin className="w-3.5 h-3.5 text-accent-ink" />
+                  <span>Lagos, Nigeria ·</span>
+                  <span className="inline-flex items-center gap-1.5 text-text-primary">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                    </span>
+                    Available Globally
+                  </span>
                 </span>
               </div>
             </div>
@@ -90,28 +149,33 @@ export default function Home() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mt-12 sm:mt-16 reveal-bio">
             <p className="lg:col-span-7 text-xl sm:text-2xl lg:text-[1.75rem] leading-[1.45] text-text-primary font-light">
-              I build the websites, apps and behind-the-scenes systems that
-              businesses run on — and I explain every bit of it in plain English.
+              Technical Partner to early-stage founders. I architect, scope, and
+              ship production-grade 0-to-1 MVPs in 6–8 weeks.
             </p>
             <div className="lg:col-span-5 flex flex-col gap-6">
               <p className="text-base sm:text-lg text-text-muted leading-relaxed">
-                Over the past five years I have helped shops sell online, clinics
-                book patients, agencies show off their artists and market traders
-                keep records. If you can describe the problem, I can build the
-                thing that fixes it.
+                I turn raw product ideas into scalable, investor-ready software — eliminating roadmap bloat so you launch on schedule without burning runway.
               </p>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <a
-                  href="mailto:emmanuel.andyeze@gmail.com?subject=Project%20Enquiry"
-                  className="inline-flex items-center gap-2 bg-accent text-accent-contrast px-6 py-3.5 rounded-full text-sm font-semibold hover:opacity-85 transition-opacity"
+                  href="https://wa.me/2347034343002?text=Hi%20Emmanuel%2C%20I'd%20like%20to%20scope%20an%20MVP%20sprint%20for%20my%20product"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 bg-accent text-accent-contrast px-6 py-3.5 rounded-full text-sm font-semibold hover:shadow-lg hover:shadow-accent/20 active:scale-[0.98] transition-all duration-200"
                 >
-                  Start a project <ArrowUpRight className="w-4 h-4" />
+                  Scope Your MVP Sprint <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+                <a
+                  href="mailto:emmanuel.andyeze@gmail.com?subject=MVP%20Sprint%20Scoping%20Inquiry&body=Hi%20Emmanuel%2C%0A%0AI'm%20planning%20a%20new%20build%20and%20would%20like%20to%20scope%20our%20MVP%20sprint."
+                  className="group inline-flex items-center gap-2 border border-border-main text-text-primary px-6 py-3.5 rounded-full text-sm font-semibold hover:border-accent hover:text-accent-ink hover:bg-surface/50 active:scale-[0.98] transition-all duration-200"
+                >
+                  Email Brief <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
                 <a
                   href="#work"
-                  className="inline-flex items-center gap-2 border border-border-main text-text-primary px-6 py-3.5 rounded-full text-sm font-semibold hover:border-accent hover:text-accent-ink transition-colors"
+                  className="group inline-flex items-center gap-1.5 text-text-muted hover:text-text-primary px-2 py-3.5 text-sm font-medium transition-colors"
                 >
-                  See the work
+                  See selected builds <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1 text-accent-ink" />
                 </a>
               </div>
             </div>
@@ -125,35 +189,52 @@ export default function Home() {
               {metrics.map((metric, i) => (
                 <div
                   key={metric.label}
-                  className={`py-10 sm:py-14 px-4 sm:px-6 first:pl-0 lg:last:pr-0 flex flex-col gap-1 border-border-main ${METRIC_BORDERS[i]}`}
+                  className={`py-10 sm:py-14 px-4 sm:px-6 first:pl-0 lg:last:pr-0 flex flex-col justify-between border-border-main group transition-colors duration-300 hover:bg-surface/25 cursor-default ${METRIC_BORDERS[i]}`}
                 >
-                  <span className="display text-5xl sm:text-6xl lg:text-7xl text-accent-ink">
+                  <span className="display text-5xl sm:text-6xl lg:text-7xl text-accent-ink whitespace-nowrap transition-transform duration-300 group-hover:translate-x-1 inline-block">
                     {metric.value}
                   </span>
-                  <span className="text-sm sm:text-base font-semibold text-text-primary mt-2">
-                    {metric.label}
-                  </span>
-                  <span className="text-xs text-text-muted leading-relaxed">
-                    {metric.note}
-                  </span>
+                  <div className="flex flex-col gap-1 mt-3 sm:mt-4">
+                    <span className="text-sm sm:text-base font-semibold text-text-primary group-hover:text-accent-ink transition-colors duration-200">
+                      {metric.label}
+                    </span>
+                    <span className="text-xs text-text-muted leading-relaxed">
+                      {metric.note}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* -------------------------------------------------------- Marquee */}
-        <div className="overflow-hidden py-6 border-b border-border-main select-none">
+        {/* ------------------------------------------------ Client Logos Marquee */}
+        <div className="overflow-hidden py-7 sm:py-9 border-b border-border-main select-none bg-surface/30 group/marquee">
           <div className="whitespace-nowrap flex">
-            <div className="animate-marquee inline-block">
-              {[...marqueeItems, ...marqueeItems].map((item, i) => (
-                <span
-                  key={i}
-                  className="text-base sm:text-xl font-medium text-text-muted px-6"
+            <div className="animate-marquee group-hover/marquee:[animation-play-state:paused] inline-flex items-center">
+              {[...clientLogos, ...clientLogos].map((client, i) => (
+                <div
+                  key={`${client.name}-${i}`}
+                  className="inline-flex items-center justify-center shrink-0 px-8 sm:px-12 group cursor-pointer"
+                  title={client.name}
                 >
-                  {item}
-                  <span className="text-accent-ink pl-6">/</span>
-                </span>
+                  <Image
+                    src={client.srcDark}
+                    alt={`${client.name} logo`}
+                    width={180}
+                    height={48}
+                    unoptimized
+                    className="dark-only h-8 sm:h-10 w-auto max-w-[130px] sm:max-w-[170px] object-contain opacity-80 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110"
+                  />
+                  <Image
+                    src={client.srcLight}
+                    alt={`${client.name} logo`}
+                    width={180}
+                    height={48}
+                    unoptimized
+                    className="light-only h-8 sm:h-10 w-auto max-w-[130px] sm:max-w-[170px] object-contain opacity-80 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-110"
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -167,9 +248,8 @@ export default function Home() {
               <br />
               work
             </h2>
-            <p className="text-sm sm:text-base text-text-muted max-w-[320px] sm:text-right sm:pb-4">
-              Eleven products, built end to end. Ten of them are live and being
-              used right now.
+            <p className="text-sm sm:text-base text-text-muted max-w-[340px] sm:text-right sm:pb-4">
+              Ten production systems, architected and shipped end to end. All running live in production with active users and real transactions.
             </p>
           </div>
 
@@ -177,19 +257,19 @@ export default function Home() {
             {projects.map((project) => (
               <article
                 key={project.name}
-                className="group border-t border-border-main py-10 sm:py-14 project-card-reveal"
+                className="group border-t border-border-main py-10 sm:py-14 project-card-reveal transition-colors duration-300 hover:bg-surface/20 -mx-4 sm:-mx-6 px-4 sm:px-6 rounded-2xl"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                   {/* Snapshot of the live site */}
                   <div className="lg:col-span-5">
-                    <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-border-main bg-surface">
+                    <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-border-main bg-surface transition-all duration-500 group-hover:border-accent/40 group-hover:shadow-2xl group-hover:shadow-black/25">
                       {project.image ? (
                         <Image
                           src={project.image}
-                          alt={`The ${project.name} website`}
+                          alt={`The ${project.name} platform`}
                           fill
                           sizes="(max-width: 1024px) 100vw, 45vw"
-                          className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                          className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                         />
                       ) : (
                         // No public URL to capture — a typographic panel instead
@@ -206,12 +286,12 @@ export default function Home() {
                   {/* Everything else */}
                   <div className="lg:col-span-7 flex flex-col gap-6">
                     <div className="flex items-start gap-4">
-                      <span className="text-xs font-mono text-text-muted pt-2">
+                      <span className="text-xs font-mono text-text-muted pt-2 transition-colors duration-200 group-hover:text-accent-ink">
                         {project.num}
                       </span>
                       <div className="flex flex-col gap-2">
                         <h3
-                          className={`display text-text-primary group-hover:text-accent-ink transition-colors ${project.featured
+                          className={`display text-text-primary group-hover:text-accent-ink transition-colors duration-300 ${project.featured
                             ? 'text-4xl sm:text-5xl lg:text-[3.5rem]'
                             : 'text-3xl sm:text-4xl'
                             }`}
@@ -237,11 +317,11 @@ export default function Home() {
                       {project.summary}
                     </p>
 
-                    <ul className="grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-2">
+                    <ul className="grid grid-cols-1 sm:grid-cols-1 gap-y-2.5">
                       {project.highlights.map((highlight) => (
                         <li
                           key={highlight}
-                          className="flex items-start gap-2.5 text-sm text-text-muted"
+                          className="flex items-start gap-2.5 text-sm text-text-muted transition-colors duration-200 group-hover:text-text-primary"
                         >
                           <span className="text-accent-ink pt-0.5 leading-none">/</span>
                           {highlight}
@@ -251,7 +331,7 @@ export default function Home() {
 
                     <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4 pt-2 border-t border-border-sub">
                       <div className="flex flex-col gap-1 pt-3">
-                        <span className="eyebrow">Built with</span>
+                        <span className="eyebrow">Architecture & Stack</span>
                         <span className="text-sm text-text-muted">
                           {project.builtWith}
                         </span>
@@ -266,9 +346,9 @@ export default function Home() {
                               {...(isExternal
                                 ? { target: '_blank', rel: 'noopener noreferrer' }
                                 : {})}
-                              className="inline-flex items-center gap-1.5 text-sm font-semibold text-text-primary border-b border-border-main hover:text-accent-ink hover:border-accent pb-0.5 transition-colors"
+                              className="group/link inline-flex items-center gap-1.5 text-sm font-semibold text-text-primary border-b border-border-main hover:text-accent-ink hover:border-accent pb-0.5 transition-colors"
                             >
-                              {link.label} <ArrowUpRight className="w-3.5 h-3.5" />
+                              {link.label} <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                             </a>
                           );
                         })}
@@ -288,25 +368,22 @@ export default function Home() {
           className="border-t border-border-main bg-surface scroll-mt-24"
         >
           <div className="max-w-[1240px] mx-auto px-5 sm:px-8 py-20 sm:py-32">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14 sm:mb-20">
+            <div className="mb-14 sm:mb-20">
+              <span className="eyebrow block mb-3 sm:mb-4">Infrastructure & Systems</span>
               <h2 className="display text-[13vw] sm:text-[8vw] lg:text-[6rem] text-text-primary">
-                What I
+                Battle-tested
                 <br />
-                work with
+                stack
               </h2>
-              <p className="text-sm sm:text-base text-text-muted max-w-[340px] sm:text-right sm:pb-4">
-                The tool names are here for anyone who wants them — but what
-                matters is what each one lets your business do.
-              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border-main border border-border-main skills-reveal">
               {skillGroups.map((group) => (
                 <div
                   key={group.title}
-                  className="bg-bg-paper p-8 sm:p-10 flex flex-col gap-4 hover:bg-surface-hover transition-colors duration-300"
+                  className="group bg-bg-paper p-8 sm:p-10 flex flex-col gap-4 hover:bg-surface-hover transition-all duration-300 hover:shadow-lg"
                 >
-                  <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-text-primary">
+                  <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-text-primary group-hover:text-accent-ink transition-colors duration-300">
                     {group.title}
                   </h3>
                   <p className="text-sm text-text-muted leading-relaxed flex-grow">
@@ -316,7 +393,7 @@ export default function Home() {
                     {group.items.map((item) => (
                       <span
                         key={item}
-                        className="text-xs font-medium px-3 py-1.5 rounded-full border border-border-main text-text-muted"
+                        className="text-xs font-medium px-3 py-1.5 rounded-full border border-border-main text-text-muted hover:border-accent hover:text-accent-ink hover:bg-surface transition-all duration-200 cursor-default hover:scale-105 inline-block"
                       >
                         {item}
                       </span>
@@ -329,30 +406,38 @@ export default function Home() {
         </section>
 
         {/* ------------------------------------------------------ Principles */}
-        <section className="max-w-[1240px] mx-auto px-5 sm:px-8 py-20 sm:py-32">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14 sm:mb-20">
+        <section id="practice" className="max-w-[1240px] mx-auto px-5 sm:px-8 py-20 sm:py-32 scroll-mt-24">
+          <div className="mb-14 sm:mb-20">
+            <span className="eyebrow block mb-3 sm:mb-4">Strategic Practice</span>
             <h2 className="display text-[13vw] sm:text-[8vw] lg:text-[6rem] text-text-primary">
-              How I
+              Core practice
               <br />
-              work
+              areas
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border-main border border-border-main rounded-2xl overflow-hidden philosophy-card-reveal">
             {principles.map((principle, i) => (
               <div
                 key={principle.title}
-                className="flex flex-col gap-4 philosophy-card-reveal"
+                className="group bg-bg-paper p-8 sm:p-12 flex flex-col justify-between gap-6 hover:bg-surface-hover transition-all duration-300 hover:shadow-lg"
               >
-                <span className="display text-5xl text-accent-ink">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3 className="text-xl sm:text-2xl font-semibold tracking-tight text-text-primary">
-                  {principle.title}
-                </h3>
-                <p className="text-base text-text-muted leading-relaxed">
-                  {principle.body}
-                </p>
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-baseline justify-between border-b border-border-sub pb-4">
+                    <span className="display text-4xl sm:text-5xl text-accent-ink transition-transform duration-300 group-hover:scale-110 inline-block origin-left">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span className="eyebrow">
+                      Practice Area {String(i + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-text-primary group-hover:text-accent-ink transition-colors duration-300 pt-2">
+                    {principle.title}
+                  </h3>
+                  <p className="text-base sm:text-lg text-text-muted leading-relaxed font-light">
+                    {principle.body}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -365,30 +450,27 @@ export default function Home() {
         >
           <div className="max-w-[1240px] mx-auto px-5 sm:px-8 py-20 sm:py-32">
             <h2 className="display text-[13vw] sm:text-[8vw] lg:text-[6rem] text-text-primary mb-14 sm:mb-20">
-              5 years of
+              Technical
               <br />
-              experience
+              partnership
             </h2>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 border-t border-border-main pt-10 timeline-reveal">
               <div className="lg:col-span-4 flex flex-col gap-2">
                 <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-text-primary">
-                  Independent engineer
+                  Technical Partner & Systems Architect
                 </h3>
-                <span className="eyebrow">2021 — Present</span>
+                <span className="eyebrow">2021 — Present · Practice Lead</span>
               </div>
               <div className="lg:col-span-8 flex flex-col gap-5">
                 <p className="text-base sm:text-lg text-text-muted leading-relaxed">
-                  I work directly with the people who own the business — usually
-                  founders and small teams — from the first sketch through to the
-                  day it goes live and beyond. That means I do the whole job: the
-                  part customers see, the part that stores the data, the payment
-                  connections, and the dashboard your staff use every morning.
+                  I serve as lead technical partner and system architect for early-stage and venture-backed founders, overseeing system design, infrastructure, and product execution from inception through launch.
                 </p>
                 <p className="text-base sm:text-lg text-text-muted leading-relaxed">
-                  So far that has covered shops, clinics, law firms, auditors,
-                  architects, musicians, creative agencies and market traders
-                  across Nigeria and beyond.
+                  Currently guiding technical architecture, infrastructure, and delivery pipelines across concurrent startups spanning B2B SaaS, workflow automation, and marketplace platforms. I direct technical roadmaps, build-vs-buy decisions, and technical due diligence preparation while enforcing automated CI/CD testing pipelines and cloud cost efficiency.
+                </p>
+                <p className="text-base sm:text-lg text-text-muted leading-relaxed">
+                  When client companies reach the inflection point to hire in-house, I evaluate engineering candidates, conduct technical interviews, and transition the codebase smoothly to full-time engineering teams.
                 </p>
               </div>
             </div>
@@ -401,15 +483,15 @@ export default function Home() {
             <div className="max-w-[1240px] mx-auto px-5 sm:px-8 py-20 sm:py-32 thoughts-reveal">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14 sm:mb-20">
                 <h2 className="display text-[13vw] sm:text-[8vw] lg:text-[6rem] text-text-primary">
-                  Recent
+                  Architectural
                   <br />
-                  thoughts
+                  notes
                 </h2>
                 <Link
                   href="/thoughts"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-text-primary hover:text-accent-ink transition-colors sm:pb-4"
+                  className="group inline-flex items-center gap-2 text-sm font-semibold text-text-primary hover:text-accent-ink transition-colors sm:pb-4"
                 >
-                  Read them all <ArrowRight className="w-4 h-4" />
+                  Read all notes <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </Link>
               </div>
 
@@ -417,7 +499,7 @@ export default function Home() {
                 {recentThoughts.map((thought) => (
                   <article
                     key={thought.slug}
-                    className="bg-bg-paper p-8 sm:p-10 flex flex-col gap-4 hover:bg-surface-hover transition-colors duration-300"
+                    className="group bg-bg-paper p-8 sm:p-10 flex flex-col gap-4 hover:bg-surface-hover transition-all duration-300 hover:shadow-lg"
                   >
                     <span className="text-xs text-text-muted">
                       {new Date(thought.date).toLocaleDateString('en-US', {
@@ -431,7 +513,7 @@ export default function Home() {
                     <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight leading-tight text-text-primary">
                       <Link
                         href={`/thoughts/${thought.slug}`}
-                        className="hover:text-accent-ink transition-colors"
+                        className="group-hover:text-accent-ink transition-colors duration-200"
                       >
                         {thought.title}
                       </Link>
@@ -441,9 +523,9 @@ export default function Home() {
                     </p>
                     <Link
                       href={`/thoughts/${thought.slug}`}
-                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-text-primary border-b border-border-main hover:text-accent-ink hover:border-accent pb-0.5 w-max mt-2 transition-colors"
+                      className="group/read inline-flex items-center gap-1.5 text-sm font-semibold text-text-primary border-b border-border-main hover:text-accent-ink hover:border-accent pb-0.5 w-max mt-2 transition-colors"
                     >
-                      Read it <ArrowUpRight className="w-3.5 h-3.5" />
+                      Read it <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/read:translate-x-0.5 group-hover/read:-translate-y-0.5" />
                     </Link>
                   </article>
                 ))}
